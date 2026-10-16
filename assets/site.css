@@ -91,17 +91,26 @@ body.menu .mm a.ml{transform:none;opacity:1}
 @media(max-width:420px){.langs button{padding:6px 8px}.logo svg{height:34px}}
 
 /* intro */
-#intro{position:fixed;inset:0;z-index:200;background:var(--ink);display:grid;place-items:center;transition:opacity .7s var(--ease),visibility .7s;animation:introFail 0s 5s forwards}
-#intro.out{opacity:0;visibility:hidden}
+#intro{position:fixed;inset:0;z-index:200;background-color:var(--ink);display:grid;place-items:center;animation:introFail 0s 6s forwards}
+#intro.out{background-color:transparent;transition:background-color 0s linear .5s}
+#intro .ilogo{display:flex;flex-direction:column;align-items:center;transition:opacity .35s var(--ease),transform .6s var(--ease)}
+#intro.out .ilogo{opacity:0;transform:translateY(-36px) scale(.96)}
 #intro svg{width:min(260px,58vw);height:auto;overflow:visible}
 #intro .lb{transform-box:fill-box;transform-origin:50% 100%;transform:scaleY(0);animation:ibRise .8s var(--ease2) forwards}
 #intro .lb2{animation-delay:.12s}#intro .lb3{animation-delay:.24s}
 #intro .lbl{opacity:0;transform-box:fill-box;transform:translateY(18px);animation:ibUp .6s .62s var(--ease) forwards}
 #intro .lbl:nth-of-type(2){animation-delay:.7s}#intro .lbl:nth-of-type(3){animation-delay:.78s}
-#intro .ln{position:absolute;bottom:calc(50% - 110px);left:50%;width:0;height:1.5px;background:var(--cu2);transform:translateX(-50%);animation:ibLine .9s .8s var(--ease) forwards}
+#intro .ln{display:block;width:150px;height:2px;margin-top:30px;background:rgba(255,255,255,.1);overflow:hidden;border-radius:2px}
+#intro .ln i{display:block;height:100%;background:linear-gradient(90deg,var(--cu),var(--cu2));transform-origin:left;transform:scaleX(0);animation:ibLoad 1.75s .15s var(--ease) forwards}
+#intro .ipanes{position:absolute;inset:0;display:grid;grid-template-columns:repeat(3,1fr);pointer-events:none;overflow:hidden}
+#intro .ipanes i{transform:translateY(101%);background:repeating-linear-gradient(90deg,rgba(0,0,0,.2) 0 3px,transparent 3px 22px),var(--pc)}
+#intro .ipanes i:nth-child(1){--pc:#595868}#intro .ipanes i:nth-child(2){--pc:#7b7a5c}#intro .ipanes i:nth-child(3){--pc:#9c6a3f}
+#intro.out .ipanes i{animation:paneSweep 1.05s cubic-bezier(.7,0,.2,1) forwards}
+#intro.out .ipanes i:nth-child(2){animation-delay:.07s}#intro.out .ipanes i:nth-child(3){animation-delay:.14s}
+@keyframes paneSweep{0%{transform:translateY(101%)}44%,54%{transform:translateY(0)}100%{transform:translateY(-101%)}}
 @keyframes ibRise{to{transform:scaleY(1)}}
 @keyframes ibUp{to{opacity:1;transform:none}}
-@keyframes ibLine{to{width:120px}}
+@keyframes ibLoad{to{transform:scaleX(1)}}
 @keyframes introFail{to{visibility:hidden;opacity:0}}
 
 /* page transition */
@@ -109,10 +118,22 @@ body.menu .mm a.ml{transform:none;opacity:1}
 body.leaving .ptrans{opacity:1}
 
 /* hero */
+.hchap{position:absolute;z-index:2;text-shadow:0 2px 14px rgba(0,0,0,.6);right:max(var(--pad),calc((100vw - 1400px)/2 + var(--pad)));bottom:104px;width:290px;color:#fff;pointer-events:none}
+.hchap .hn{display:flex;align-items:baseline;gap:8px}
+.hchap .hn b{font:800 34px/1 var(--fd);font-stretch:116%;color:var(--cu2);font-variant-numeric:tabular-nums}
+.hchap .hn span{font:600 13px var(--fb);letter-spacing:.12em;color:var(--mut)}
+.hchap .hl{position:relative;height:24px;overflow:hidden;margin-top:8px}
+.hchap .hl span{position:absolute;left:0;top:0;white-space:nowrap;font:600 16px/24px var(--fd);color:var(--tx);opacity:0;transform:translateY(100%);transition:transform .6s var(--ease),opacity .6s var(--ease)}
+.hchap .hl span.on{opacity:1;transform:none}
+.hchap .hl span.off{opacity:0;transform:translateY(-100%)}
+.hchap .hbars{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-top:14px}
+.hchap .hbars i{height:2px;border-radius:2px;background:rgba(255,255,255,.16);overflow:hidden}
+.hchap .hbars u{display:block;height:100%;background:var(--cu2);transform-origin:left;transform:scaleX(0)}
+
 .hero{position:relative;height:100vh;height:100svh;min-height:620px;overflow:hidden;background:#06080d}
 .hero video,.hero .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.hero .hv2{opacity:0;transition:opacity .6s linear}
-.hero .hv2.on{opacity:1}
+.hero .hv1{opacity:0;transition:opacity .5s linear}
+.hero .hv1.on{opacity:1}
 .hero::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(6,8,13,.86) 0%,rgba(6,8,13,.55) 32%,rgba(6,8,13,0) 58%),linear-gradient(0deg,rgba(6,8,13,.75),rgba(6,8,13,0) 30%)}
 .hero .hc{position:relative;z-index:2;height:100%;max-width:1400px;margin:0 auto;padding:calc(var(--hh) + 20px) var(--pad) 96px;display:flex;flex-direction:column;justify-content:center}
 .hero .chip{align-self:flex-start;display:inline-flex;align-items:center;gap:10px;padding:8px 14px 8px 10px;border-radius:999px;border:1px solid var(--line2);background:rgba(255,255,255,.05);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);font:700 12.5px var(--fb);letter-spacing:.06em;color:var(--tx2)}
@@ -127,6 +148,7 @@ body.leaving .ptrans{opacity:1}
 .hero .facts div{padding:20px 0 22px;display:flex;align-items:center;gap:12px;font:600 14px/1.3 var(--fd);color:var(--tx2)}
 .hero .facts div+div{padding-left:20px;border-left:1px solid var(--line)}
 .hero .facts svg{width:22px;height:22px;flex:none;color:var(--cu2)}
+.hero .hchap~.scroll{display:none}
 .hero .scroll{position:absolute;z-index:2;right:var(--pad);bottom:96px;writing-mode:vertical-rl;font:700 11px var(--fb);letter-spacing:.3em;text-transform:uppercase;color:var(--mut);display:flex;align-items:center;gap:12px}
 .hero .scroll::after{content:"";width:1px;height:56px;background:linear-gradient(var(--cu2),transparent);animation:sline 2.2s infinite}
 @keyframes sline{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
@@ -153,6 +175,10 @@ body.leaving .ptrans{opacity:1}
   .hero::after{height:100svh;min-height:640px;bottom:auto}
   .hero .hc{height:100svh;min-height:640px;padding-bottom:30px}
   .hero .chip{display:none}
+  .hchap{left:var(--pad);right:auto;top:calc(var(--hh) + 12px);bottom:auto;width:auto;display:flex;align-items:center;gap:12px}
+  .hchap .hn b{font-size:20px}.hchap .hn span{font-size:11px}
+  .hchap .hl{margin:0;height:20px;width:62vw}.hchap .hl span{font-size:13.5px;line-height:20px;color:var(--tx2)}
+  .hchap .hbars{display:none}
   .hero .facts{position:relative;background:#06080d}
 }
 

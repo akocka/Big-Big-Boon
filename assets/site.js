@@ -111,26 +111,31 @@ const startPage = () => {
   let seen = false; try { seen = sessionStorage.getItem('bbb-intro2') === '1'; } catch (e) {}
   if (seen || REDUCE) { el.remove(); return startPage(); }
   document.documentElement.style.overflow = 'hidden';
-  const end = () => { if (!el.isConnected || el.classList.contains('out')) return; el.classList.add('out'); document.documentElement.style.overflow = ''; try { sessionStorage.setItem('bbb-intro2', '1'); } catch (e) {} setTimeout(startPage, 150); setTimeout(() => el.remove(), 900); };
-  el.addEventListener('click', end); setTimeout(end, 1900);
+  const end = () => { if (!el.isConnected || el.classList.contains('out')) return; el.classList.add('out'); document.documentElement.style.overflow = ''; try { sessionStorage.setItem('bbb-intro2', '1'); } catch (e) {} setTimeout(startPage, 430); setTimeout(() => el.remove(), 1400); };
+  el.addEventListener('click', end); setTimeout(end, 2050);
 })();
 
-/* ---------- hero video: builds once, then idles on a seamless loop ---------- */
+/* ---------- hero film: 6 chapters x 2.5s, seamless loop, captions synced to the video ---------- */
 function startHero() {
   const hero = $('.hero'); if (!hero) return;
-  const v1 = $('.hv1', hero), v2 = $('.hv2', hero);
-  const port = innerWidth / innerHeight < 1;
-  const sfx = port ? '-m' : '';
+  const v = $('.hv1', hero), poster = $('.poster', hero);
+  const port = innerWidth / innerHeight < 1, sfx = port ? '-m' : '';
+  const labels = $$('.hchap .hl span', hero), bars = $$('.hchap .hbars u', hero), num = $('.hchap .hn b', hero);
+  let cur = 0;
+  const setChap = (i, prog) => {
+    if (i !== cur) { labels.forEach((l, k) => { l.classList.toggle('on', k === i); l.classList.toggle('off', k === cur && k !== i); }); if (num) num.textContent = '0' + (i + 1); cur = i; }
+    bars.forEach((b, k) => { b.style.transform = `scaleX(${k < i ? 1 : k === i ? prog : 0})`; });
+  };
   const saveData = navigator.connection && navigator.connection.saveData;
-  if (REDUCE || saveData) { const p = $('.poster', hero); if (p) p.src = `img/hero-still${sfx}.jpg`; return; }
-  const ext = v1.canPlayType('video/mp4; codecs="avc1.640028"') ? 'mp4' : 'webm';
-  v1.src = `video/hero-build${sfx}.${ext}`; v2.src = `video/hero-loop${sfx}.${ext}`;
-  v2.load();
-  const playLoop = () => { v2.currentTime = 0; v2.play().catch(() => {}); v2.classList.add('on'); };
-  v1.addEventListener('ended', playLoop);
-  v1.addEventListener('error', () => { const p = $('.poster', hero); if (p) p.src = `img/hero-still${sfx}.jpg`; });
-  const pr = v1.play(); if (pr) pr.catch(() => { const p = $('.poster', hero); if (p) p.src = `img/hero-still${sfx}.jpg`; });
-  new IntersectionObserver(es => { const vis = es[0].isIntersecting; [v1, v2].forEach(v => { if (!vis) v.pause(); }); if (vis) { if (v2.classList.contains('on')) v2.play().catch(() => {}); else if (!v1.ended) v1.play().catch(() => {}); } }, { threshold: 0.05 }).observe(hero);
+  if (REDUCE || saveData || !v) { if (poster) poster.src = `img/hero-still${sfx}.jpg`; return; }
+  const ext = v.canPlayType('video/mp4; codecs="avc1.640028"') ? 'mp4' : 'webm';
+  v.src = `video/hero-film${sfx}.${ext}`;
+  v.addEventListener('playing', () => v.classList.add('on'), { once: true });
+  v.addEventListener('error', () => { if (poster) poster.src = `img/hero-still${sfx}.jpg`; });
+  const tick = () => { if (!v.paused) { const t = v.currentTime % 15; setChap(Math.min(5, Math.floor(t / 2.5)), (t % 2.5) / 2.5); } requestAnimationFrame(tick); };
+  requestAnimationFrame(tick);
+  v.play().catch(() => {});
+  new IntersectionObserver(es => { if (es[0].isIntersecting) v.play().catch(() => {}); else v.pause(); }, { threshold: 0.05 }).observe(hero);
 }
 
 /* ---------- reveal ---------- */
