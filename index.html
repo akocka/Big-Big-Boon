@@ -1604,5 +1604,44 @@ try{ if(typeof T!=='undefined'){T.hu=T.hu||{};T.en=T.en||{};T.hu.abtMore='Tudj m
      if(typeof LANG!=='undefined'&&LANG!=='ro'&&typeof setLang==='function')setLang(LANG);
      if(typeof observe==='function')observe(); }catch(e){}
 </script>
+<script>
+/* ===== form: send to Make ===== */
+(function(){
+  var HOOK="https://hook.eu2.make.com/xevess3cwcepi6856ab283362eaz2etc";
+  var M={ro:{sending:"Se trimite…",done:"Mulțumim! Am primit cererea și te contactăm în curând.",err:"Nu s-a putut trimite. Încearcă din nou peste câteva minute.",name:"Scrie-ți numele.",phone:"Lasă un număr de telefon complet, ca să te putem suna.",send:"Trimite cererea →",again:"Ai trimis deja cererea. Te contactăm în curând.",priv:"Datele tale sunt folosite doar ca să-ți răspundem la cerere."},
+         hu:{sending:"Küldés…",done:"Köszönjük! Megkaptuk a kérését, hamarosan jelentkezünk.",err:"Nem sikerült elküldeni. Próbálja újra pár perc múlva.",name:"Írja be a nevét.",phone:"Adjon meg teljes telefonszámot, hogy visszahívhassuk.",send:"Ajánlatkérés küldése →",again:"A kérését már elküldte. Hamarosan jelentkezünk.",priv:"Adatait csak a kérésére való válaszhoz használjuk."},
+         en:{sending:"Sending…",done:"Thank you! We received your request and will contact you soon.",err:"Could not send. Please try again in a few minutes.",name:"Please enter your name.",phone:"Please leave a full phone number so we can call you.",send:"Send request →",again:"You already sent a request. We'll contact you soon.",priv:"Your details are used only to reply to your request."}};
+  function L(){var l=(typeof LANG!=="undefined"?LANG:document.documentElement.lang)||"ro";return M[l]?l:"ro"}
+  function msg(k){return M[L()][k]}
+  var form=document.getElementById("form"),btn=document.getElementById("fSend"),note=document.getElementById("fNote");
+  if(!form||!btn||!note)return;
+  var hp=document.createElement("input");hp.name="company_site";hp.tabIndex=-1;hp.autocomplete="off";hp.setAttribute("aria-hidden","true");
+  hp.style.cssText="position:absolute;left:-9999px;width:1px;height:1px;opacity:0";form.appendChild(hp);
+  var priv=document.createElement("p");priv.className="note";priv.style.cssText="opacity:.7;font-size:12.5px;margin-top:4px";form.appendChild(priv);
+  function setPriv(){priv.textContent=msg("priv")}setPriv();
+  new MutationObserver(setPriv).observe(document.documentElement,{attributes:true,attributeFilter:["lang"]});
+  var T0=Date.now(),sent=false;
+  function say(t,c){note.textContent=t;note.style.color=c||""}
+  btn.onclick=async function(e){
+    if(e)e.preventDefault();
+    if(sent){say(msg("again"),"var(--wood2)");return}
+    var n=form.elements["n"].value.trim(),p=form.elements["p"].value.trim(),sel=form.elements["t"],m=form.elements["m"].value.trim();
+    if(!n){say(msg("name"),"#ff8a7a");form.elements["n"].focus();return}
+    if(p.replace(/\D/g,"").length<9){say(msg("phone"),"#ff8a7a");form.elements["p"].focus();return}
+    sent=true;
+    if(hp.value||Date.now()-T0<3000){say(msg("done"),"var(--wood2)");return}
+    var id="BBB-"+Date.now().toString(36).toUpperCase()+"-"+Math.random().toString(36).slice(2,6).toUpperCase();
+    var data=new URLSearchParams({created_at:new Date().toISOString(),source:"bigbigboon-site",request_id:id,page:location.pathname||"/",lang:L(),
+      name:n,phone:p,interest:sel.options[sel.selectedIndex].text,message:m});
+    btn.disabled=true;var old=btn.textContent;btn.textContent=msg("sending");
+    try{
+      var ctrl=new AbortController(),tm=setTimeout(function(){ctrl.abort()},15000);
+      var res=await fetch(HOOK,{method:"POST",body:data,signal:ctrl.signal});clearTimeout(tm);
+      if(!res.ok)throw new Error("http "+res.status);
+      say(msg("done"),"var(--wood2)");btn.textContent="✓";
+    }catch(x){sent=false;btn.disabled=false;btn.textContent=old;say(msg("err"),"#ff8a7a")}
+  };
+})();
+</script>
 </body>
 </html>
