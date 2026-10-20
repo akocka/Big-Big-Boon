@@ -7,9 +7,6 @@
 <meta name="description" content="Echipa Big Big Boon: recepție, vânzări, proiectare, producție și montaj, în hala din Miercurea Nirajului, Mureș.">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#121417">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"LocalBusiness","name":"Big Big Boon","legalName":"BIG BIG BOON 2020 SRL","description":"Construcții modulare din metal și lemn","vatID":"RO43611636","address":{"@type":"PostalAddress","streetAddress":"Str. Trandafirilor 166","postalCode":"547410","addressLocality":"Miercurea Nirajului","addressRegion":"Mureș","addressCountry":"RO"}}
@@ -520,6 +517,10 @@ body.inbuild .mcta{transform:translateY(90px)!important}
 @media(max-width:900px){.b3-desc{margin-top:6px;font-size:13.5px;min-height:0}.b3-big{top:84px;bottom:auto;right:14px;font-size:84px}}
 
 </style>
+<link rel="preload" href="fonts/archivo.woff" as="font" type="font/woff" crossorigin>
+<style>@font-face{font-family:"Archivo";src:url(fonts/archivo.woff) format("woff");font-weight:500 800;font-display:swap}
+@font-face{font-family:"Manrope";src:url(fonts/manrope.woff) format("woff");font-weight:400 700;font-display:swap}</style>
+<style>.mapc{display:grid;place-items:center;background:radial-gradient(circle at 50% 40%,#2a2620,#1b1e22)}.mapbtn{all:unset;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;padding:24px;color:#EAD7BC;max-width:280px}.mapbtn b{font:700 18px var(--fd,inherit)}.mapbtn small{opacity:.7;font-size:13px;line-height:1.4}.mapbtn:focus-visible{outline:2px solid var(--wood2);outline-offset:4px;border-radius:12px}</style>
 </head>
 <body data-page="team" data-title="titleTeam">
 <div id="intro" aria-hidden="true">
@@ -626,7 +627,7 @@ body.inbuild .mcta{transform:translateY(90px)!important}
         </div>
         <a class="btn p rv" style="margin-top:26px" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=Str.%20Trandafirilor%20166%2C%20547410%20Miercurea%20Nirajului"><span data-t="rcDir">Deschide în Google Maps</span> ↗</a>
       </div>
-      <div class="map rv"><iframe title="Big Big Boon pe hartă" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=Str.%20Trandafirilor%20166%2C%20547410%20Miercurea%20Nirajului&amp;z=14&amp;output=embed"></iframe></div>
+      <div class="map rv mapc" id="mapBox"><button type="button" class="mapbtn" id="mapLoad"><svg viewBox="0 0 24 24" width="34" height="34" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg><b data-t="mapShow">Arată harta</b><small data-t="mapNote">Harta se încarcă de la Google doar după ce apeși.</small></button></div>
     </div>
   </section>
 </main>
@@ -965,6 +966,11 @@ if(saved!=='ro')setLang(saved);
     }catch(x){sent=false;btn.disabled=false;btn.textContent=old;say(msg("err"),"#ff8a7a")}
   };
 })();
+</script>
+<script>
+(function(){var b=document.getElementById("mapLoad");if(!b)return;
+try{Object.assign(T.hu,{mapShow:"Térkép megjelenítése",mapNote:"A térkép csak kattintás után töltődik be a Google-tól."});Object.assign(T.en,{mapShow:"Show the map",mapNote:"The map loads from Google only after you tap."});RO.mapShow=RO.mapShow||"Arată harta";RO.mapNote=RO.mapNote||"Harta se încarcă de la Google doar după ce apeși.";if(typeof LANG!=="undefined"&&LANG!=="ro"&&typeof setLang==="function")setLang(LANG)}catch(e){}
+b.addEventListener("click",function(){var box=document.getElementById("mapBox");box.classList.remove("mapc");box.innerHTML='<iframe title="Big Big Boon pe hartă" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=Str.%20Trandafirilor%20166%2C%20547410%20Miercurea%20Nirajului&amp;z=14&amp;output=embed"></iframe>'})})();
 </script>
 </body>
 </html>
