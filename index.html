@@ -632,23 +632,24 @@ footer .flogo img{height:104px;width:auto}
 <meta property="og:image" content="https://www.bigbigboon.ro/img/og-big-big-boon.jpg">
 <style>.ib-real{width:min(62vw,300px);height:auto;opacity:0;transform:translateY(12px) scale(.97);animation:ibUp .8s 2.1s forwards}</style>
 <style>
-/* hero: real product photo */
-.hero2 .h2sun,.hero2 .h2lines{display:none}
-.h2photo{position:absolute;z-index:1;top:0;right:0;bottom:0;width:66%;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 34%);mask-image:linear-gradient(90deg,transparent 0,#000 34%)}
-.h2photo picture,.h2photo img{display:block;width:100%;height:100%}
-.h2photo img{object-fit:cover;object-position:58% 55%;opacity:0;transform:scale(1.04);animation:phIn 1.4s .3s cubic-bezier(.16,1,.3,1) forwards}
-.h2photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,16,18,.55) 0,rgba(15,16,18,0) 22%,rgba(15,16,18,0) 70%,rgba(15,16,18,.7) 100%)}
-@keyframes phIn{to{opacity:1;transform:none}}
+/* hero: cut-out modular building, oversized and bleeding off the edges */
+.h2stage.h2big{right:-9vw;top:clamp(0px,7vh,80px);bottom:auto;width:min(68vw,1180px)}
+.h2big picture{display:block;position:relative;z-index:2;filter:drop-shadow(0 34px 44px rgba(0,0,0,.6))}
+.h2big .h2kiosk{filter:none;-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 16%);mask-image:linear-gradient(180deg,transparent 0,#000 16%)}
+.h2big .h2pool{left:22%;right:18%;top:34%;bottom:14%;background:radial-gradient(ellipse at 50% 50%,rgba(255,184,104,.55),rgba(255,160,70,0) 70%);filter:blur(40px)}
+.h2big .h2shadow{left:6%;right:2%;bottom:-10px;height:60px}
+.hero2 .h2sun{right:-4vw;top:12%}
+.hero2::before{content:"";position:absolute;z-index:2;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(15,16,18,.92) 0,rgba(15,16,18,.6) 34%,rgba(15,16,18,0) 56%)}
+@media(min-width:901px) and (max-height:820px){.h2stage.h2big{width:min(62vw,1080px)}}
 @media(max-width:900px){
-  .h2photo{width:100%;bottom:auto;height:calc(64px + min(100vw,900px)*.64);-webkit-mask-image:linear-gradient(180deg,#000 62%,transparent 100%);mask-image:linear-gradient(180deg,#000 62%,transparent 100%)}
-  .h2photo::after{background:linear-gradient(180deg,rgba(15,16,18,.6) 0,rgba(15,16,18,0) 30%)}
-  .h2photo img{object-position:50% 60%}
-  .hero2 .in{padding-top:calc(40px + min(100vw,900px)*.64)!important}
+  .h2stage.h2big{left:-22vw;right:auto;transform:none;top:30px;width:150vw;max-width:none}
+  .hero2::before{background:linear-gradient(180deg,rgba(15,16,18,0) 0,rgba(15,16,18,0) calc(26px + 150vw*.5),rgba(15,16,18,.85) calc(60px + 150vw*.62))}
+  .hero2 .in{padding-top:calc(10px + 150vw*.6)!important}
 }
-@media(prefers-reduced-motion:reduce){.h2photo img{opacity:1;transform:none;animation:none}}
+@media(max-width:900px) and (min-width:600px){.h2stage.h2big{left:-8vw;width:116vw}.hero2::before{background:none}.hero2 .in{padding-top:calc(10px + 116vw*.6)!important}}
 </style>
-<link rel="preload" as="image" href="img/hero-modul.webp" media="(min-width:901px)">
-<link rel="preload" as="image" href="img/hero-modul-960.webp" media="(max-width:900px)">
+<link rel="preload" as="image" href="img/modul-cut.webp" media="(min-width:901px)">
+<link rel="preload" as="image" href="img/modul-cut-960.webp" media="(max-width:900px)">
 </head>
 <body data-page="home" data-title="titleHome">
 <div id="intro" aria-hidden="true">
@@ -719,10 +720,14 @@ footer .flogo img{height:104px;width:auto}
 
   <section class="hero hero2" id="acasa">
     <div class="h2bg" aria-hidden="true"><div class="h2sun"></div><div class="h2lines"></div></div>
-    <div class="h2photo"><picture><source media="(max-width:900px)" srcset="img/hero-modul-960.webp"><img src="img/hero-modul.webp" alt="Modul Big Big Boon cu placare verde și lemn, în hala de producție" width="1672" height="941" fetchpriority="high"></picture></div>
+    <div class="h2stage h2big" aria-hidden="true">
+      <div class="h2pool"></div>
+      <picture><source media="(max-width:900px)" srcset="img/modul-cut-960.webp"><img class="h2kiosk" src="img/modul-cut.webp" alt="" width="1433" height="935" fetchpriority="high"></picture>
+      <div class="h2shadow"></div>
+    </div>
     <div class="in">
       <div class="eyebrow" data-t="heroEy">Metal · Lemn · Modular — Mureș</div>
-      <h1 class="h2title"><span data-t="heroA">Construim</span><span class="rot" id="heroRot" aria-live="polite"><span class="on">chioșcuri comerciale</span></span><em data-t="heroB">din metal și lemn.</em></h1>
+      <h1 class="h2title"><span data-t="heroA">Construim</span><span class="rot" id="heroRot" aria-live="polite"><span class="on">case modulare</span></span><em data-t="heroB">din metal și lemn.</em></h1>
       <p data-t="heroP">Chioșcuri comerciale, case modulare și structuri din metal și lemn — proiectate și construite în hala noastră din Miercurea Nirajului.</p>
       <div class="ctas"><button class="btn p" data-go="contact"><span data-t="ctaQuote">Cere ofertă</span> →</button><a class="btn g" href="#produse" data-t="heroC1">Vezi produsele</a></div>
       <ul class="h2facts"><li data-t="hf1">Producție proprie în Mureș</li><li data-t="hf2">Dimensiuni la comandă</li><li data-t="hf3">Mobile și demontabile</li></ul>
@@ -1530,12 +1535,12 @@ const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 <script>
 /* ===== hero: rotating words + moving strip, in the visitor's language ===== */
 (function(){
-  var W={ro:['chioșcuri comerciale','căsuțe de târg','case modulare','pergole','copertine','mobilier de grădină'],
-         hu:['árusítóházakat','vásári házakat','moduláris házakat','pergolákat','előtetőket','kerti bútorokat'],
-         en:['retail kiosks','market stalls','modular homes','pergolas','carports','garden furniture']};
-  var M={ro:['Chioșcuri comerciale','Căsuțe de târg','Case modulare','Structuri metalice','Pergole','Copertine','Mobilier de grădină','Producție proprie în Mureș'],
-         hu:['Árusítóházak','Vásári házak','Moduláris házak','Fémszerkezetek','Pergolák','Előtetők','Kerti bútorok','Saját gyártás Maros megyében'],
-         en:['Retail kiosks','Market stalls','Modular homes','Metal structures','Pergolas','Carports','Garden furniture','Made in our own hall in Mureș']};
+  var W={ro:['case modulare','birouri modulare','chioșcuri comerciale','căsuțe de târg','pergole','copertine','mobilier de grădină'],
+         hu:['moduláris házakat','moduláris irodákat','árusítóházakat','vásári házakat','pergolákat','előtetőket','kerti bútorokat'],
+         en:['modular homes','modular offices','retail kiosks','market stalls','pergolas','carports','garden furniture']};
+  var M={ro:['Case modulare','Birouri modulare','Chioșcuri comerciale','Căsuțe de târg','Structuri metalice','Pergole','Copertine','Mobilier de grădină','Producție proprie în Mureș'],
+         hu:['Moduláris házak','Moduláris irodák','Árusítóházak','Vásári házak','Fémszerkezetek','Pergolák','Előtetők','Kerti bútorok','Saját gyártás Maros megyében'],
+         en:['Modular homes','Modular offices','Retail kiosks','Market stalls','Metal structures','Pergolas','Carports','Garden furniture','Made in our own hall in Mureș']};
   try{
     if(typeof T!=='undefined'){
       T.hu=T.hu||{};T.en=T.en||{};
