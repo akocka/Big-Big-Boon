@@ -630,26 +630,26 @@ footer .flogo img{height:104px;width:auto}
 <link rel="icon" type="image/png" href="img/favicon-64.png">
 <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 <meta property="og:image" content="https://www.bigbigboon.ro/img/og-big-big-boon.jpg">
-<style>.ib-real{width:min(62vw,300px);height:auto;opacity:0;transform:translateY(12px) scale(.97);animation:ibUp .8s 2.1s forwards}</style>
+<style>.ib-real{width:min(40vw,170px);height:auto;opacity:0;transform:translateY(12px) scale(.97);animation:ibUp .8s 2.1s forwards}</style>
 <style>
-/* hero: cut-out modular building, oversized and bleeding off the edges */
-.h2stage.h2big{right:-9vw;top:clamp(0px,7vh,80px);bottom:auto;width:min(68vw,1180px)}
-.h2big picture{display:block;position:relative;z-index:2;filter:drop-shadow(0 34px 44px rgba(0,0,0,.6))}
-.h2big .h2kiosk{filter:none;-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 16%);mask-image:linear-gradient(180deg,transparent 0,#000 16%)}
-.h2big .h2pool{left:22%;right:18%;top:34%;bottom:14%;background:radial-gradient(ellipse at 50% 50%,rgba(255,184,104,.55),rgba(255,160,70,0) 70%);filter:blur(40px)}
-.h2big .h2shadow{left:6%;right:2%;bottom:-10px;height:60px}
-.hero2 .h2sun{right:-4vw;top:12%}
-.hero2::before{content:"";position:absolute;z-index:2;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(15,16,18,.92) 0,rgba(15,16,18,.6) 34%,rgba(15,16,18,0) 56%)}
-@media(min-width:901px) and (max-height:820px){.h2stage.h2big{width:min(62vw,1080px)}}
+/* hero: cut-out modular building, floating on the site's grid floor with warm wood light */
+.hero2::before{display:none}
+.hero2 .h2sun{right:-6vw;top:6%;background:radial-gradient(circle,rgba(217,164,102,.26) 0%,rgba(200,130,60,.10) 38%,rgba(200,130,60,0) 66%)}
+.hero2 .h2lines{height:46%;background-image:linear-gradient(rgba(217,164,102,.13) 1px,transparent 1px),linear-gradient(90deg,rgba(217,164,102,.13) 1px,transparent 1px)}
+.h2stage.h2big{top:50%;bottom:auto;right:max(4vw,calc((100vw - 1320px)/2));width:min(41vw,680px);transform:translateY(calc(-50% - 20px))}
+.h2big picture{display:block;position:relative;z-index:2;filter:drop-shadow(0 22px 28px rgba(0,0,0,.55))}
+.h2big .h2kiosk{-webkit-mask-image:none;mask-image:none;filter:sepia(.12) saturate(.95)}
+.h2big .h2pool{left:18%;right:14%;top:26%;bottom:16%;filter:blur(48px);background:radial-gradient(ellipse at 50% 55%,rgba(217,164,102,.55),rgba(217,164,102,0) 70%)}
+.h2big .h2shadow{left:4%;right:0;bottom:-8px;height:50px;background:radial-gradient(ellipse at 52% 45%,rgba(0,0,0,.78),rgba(0,0,0,0) 70%)}
+.h2big::after{content:"";position:absolute;z-index:1;left:2%;right:-6%;bottom:-46px;height:90px;background:radial-gradient(ellipse at 55% 30%,rgba(255,190,120,.20),rgba(255,190,120,0) 65%);filter:blur(6px);pointer-events:none}
 @media(max-width:900px){
-  .h2stage.h2big{left:-22vw;right:auto;transform:none;top:30px;width:150vw;max-width:none}
-  .hero2::before{background:linear-gradient(180deg,rgba(15,16,18,0) 0,rgba(15,16,18,0) calc(26px + 150vw*.5),rgba(15,16,18,.85) calc(60px + 150vw*.62))}
-  .hero2 .in{padding-top:calc(10px + 150vw*.6)!important}
+  .h2stage.h2big{left:50%;right:auto;top:88px;transform:translateX(-50%);width:min(calc(100vw - 28px),560px)}
+  .hero2 .in{padding-top:calc(118px + min(calc(100vw - 28px),560px)*.66)!important}
+  .h2big::after{bottom:-36px;height:70px}
 }
-@media(max-width:900px) and (min-width:600px){.h2stage.h2big{left:-8vw;width:116vw}.hero2::before{background:none}.hero2 .in{padding-top:calc(10px + 116vw*.6)!important}}
 </style>
-<link rel="preload" as="image" href="img/modul-cut.webp" media="(min-width:901px)">
-<link rel="preload" as="image" href="img/modul-cut-960.webp" media="(max-width:900px)">
+<link rel="preload" as="image" href="img/modul-cut2.webp" media="(min-width:901px)">
+<link rel="preload" as="image" href="img/modul-cut2-960.webp" media="(max-width:900px)">
 </head>
 <body data-page="home" data-title="titleHome">
 <div id="intro" aria-hidden="true">
@@ -722,7 +722,7 @@ footer .flogo img{height:104px;width:auto}
     <div class="h2bg" aria-hidden="true"><div class="h2sun"></div><div class="h2lines"></div></div>
     <div class="h2stage h2big" aria-hidden="true">
       <div class="h2pool"></div>
-      <picture><source media="(max-width:900px)" srcset="img/modul-cut-960.webp"><img class="h2kiosk" src="img/modul-cut.webp" alt="" width="1433" height="935" fetchpriority="high"></picture>
+      <picture><source media="(max-width:900px)" srcset="img/modul-cut2-960.webp"><img class="h2kiosk" src="img/modul-cut2.webp" alt="" width="1431" height="934" fetchpriority="high"></picture>
       <div class="h2shadow"></div>
     </div>
     <div class="in">
