@@ -633,7 +633,7 @@ footer .flogo img{height:104px;width:auto}
 .hero2::before{display:none}
 .hero2 .h2sun{right:-6vw;top:6%;background:radial-gradient(circle,rgba(217,164,102,.26) 0%,rgba(200,130,60,.10) 38%,rgba(200,130,60,0) 66%)}
 .hero2 .h2lines{height:46%;background-image:linear-gradient(rgba(217,164,102,.13) 1px,transparent 1px),linear-gradient(90deg,rgba(217,164,102,.13) 1px,transparent 1px)}
-.h2stage.h2big{top:50%;bottom:auto;right:max(4vw,calc((100vw - 1320px)/2));width:min(41vw,680px);transform:translateY(calc(-50% - 20px))}
+.h2stage.h2big{z-index:3;top:50%;bottom:auto;right:max(4vw,calc((100vw - 1320px)/2));width:min(41vw,680px);transform:translateY(calc(-50% - 20px))}
 .h2big picture{display:block;position:relative;z-index:2;filter:drop-shadow(0 22px 28px rgba(0,0,0,.55))}
 .h2big .h2kiosk{-webkit-mask-image:none;mask-image:none;filter:sepia(.12) saturate(.95)}
 .h2big .h2pool{left:18%;right:14%;top:26%;bottom:16%;filter:blur(48px);background:radial-gradient(ellipse at 50% 55%,rgba(217,164,102,.55),rgba(217,164,102,0) 70%)}
@@ -645,8 +645,8 @@ footer .flogo img{height:104px;width:auto}
   .h2big::after{bottom:-36px;height:70px}
 }
 </style>
-<link rel="preload" as="image" href="img/modul-cut2.webp" media="(min-width:901px)">
-<link rel="preload" as="image" href="img/modul-cut2-960.webp" media="(max-width:900px)">
+<link rel="preload" as="image" href="img/modul-cut3.webp" media="(min-width:901px)">
+<link rel="preload" as="image" href="img/modul-cut3-960.webp" media="(max-width:900px)">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "Big Big Boon", "alternateName": ["BBB", "BBB Construcții modulare", "Big Big Boon 2020 SRL"], "url": "https://www.bigbigboon.ro/"}</script>
 
 <link rel="icon" href="/favicon.ico" sizes="48x48">
@@ -657,6 +657,62 @@ footer .flogo img{height:104px;width:auto}
 <meta name="theme-color" content="#111113">
 <meta property="og:site_name" content="Big Big Boon">
 <style>@media(max-width:520px){.hero2 .eyebrow{font-size:10.5px;letter-spacing:.09em;padding:7px 11px;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}}@media(max-width:374px){.hero2 .eyebrow{font-size:10px;letter-spacing:.05em;padding:7px 9px}}</style>
+<style>
+/* intro: house centred, logo small and quiet at the bottom */
+#intro{gap:0}
+#intro .ib-kiosk{width:min(460px,82vw)}
+#intro .ib-cap{position:absolute;left:24px;right:24px;top:calc(50% + min(460px,82vw)*.39 + 22px)}
+#intro .ib-logo{position:absolute;left:50%;bottom:calc(30px + env(safe-area-inset-bottom,0px));transform:translateX(-50%)}
+#intro .ib-real{width:min(26vw,96px)!important;animation:ibLogo .9s 2.3s forwards!important}
+@keyframes ibLogo{from{opacity:0;transform:translateY(8px)}to{opacity:.72;transform:none}}
+@media(max-width:600px){#intro .ib-logo{bottom:calc(84px + env(safe-area-inset-bottom,0px))}}
+</style>
+<style>
+/* hero: blend + selling details */
+.hero2::after{display:block!important;content:"";position:absolute;z-index:2;inset:auto 0 0 0;top:auto;height:30%;pointer-events:none;background:linear-gradient(180deg,rgba(15,16,18,0),rgba(15,16,18,.45) 65%,rgba(15,16,18,.75))}
+.h2big .h2kiosk{filter:sepia(.14) saturate(.92) brightness(.97)}
+.h2big picture{filter:drop-shadow(0 26px 30px rgba(0,0,0,.5)) drop-shadow(0 0 60px rgba(217,164,102,.10))}
+.h2big::before{content:"";position:absolute;z-index:1;left:30%;right:-4%;bottom:-70px;height:130px;background:radial-gradient(ellipse at 55% 25%,rgba(255,196,128,.26),rgba(255,180,100,.06) 45%,rgba(255,180,100,0) 70%);filter:blur(10px);pointer-events:none}
+.h2chip{position:absolute;z-index:5;display:flex;align-items:center;gap:10px;padding:10px 14px 10px 10px;border-radius:16px;background:rgba(20,21,24,.62);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 14px 30px rgba(0,0,0,.35);color:#F1EFEA;opacity:0;animation:chipIn .8s cubic-bezier(.16,1,.3,1) forwards}
+.h2chip i{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;background:rgba(217,164,102,.16);color:var(--wood2);flex:none}
+.h2chip i svg{width:20px;height:20px}
+.h2chip b{display:block;font:700 14px/1.2 var(--fd)}
+.h2chip small{display:block;font:500 12px/1.3 var(--fb);color:#A9A49A;margin-top:2px}
+.h2chip.c1{left:-4%;top:14%;animation-delay:1.5s}
+.h2chip.c2{right:2%;bottom:8%;animation-delay:1.8s}
+@keyframes chipIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.h2note{margin:12px 0 0!important;font-size:13.5px!important;color:#A9A49A!important}
+.hero2 .h2facts{display:none}
+body.intro-on .h2chip{animation-play-state:paused}
+@media(max-width:900px){
+  .h2chip{padding:7px 11px 7px 7px;gap:8px;border-radius:13px}
+  .h2chip i{width:28px;height:28px;border-radius:9px}.h2chip i svg{width:16px;height:16px}
+  .h2chip b{font-size:12px}.h2chip small{display:none}
+  .h2chip.c1{left:0;top:2%}.h2chip.c2{right:0;bottom:4%}
+  .hero2::after{height:22%}
+}
+@media(prefers-reduced-motion:reduce){.h2chip{opacity:1;animation:none}}
+</style>
+<style>
+/* hero v3: bigger, natural top, base melts into the page */
+.h2stage.h2big{right:max(1.5vw,calc((100vw - 1440px)/2));width:min(47vw,820px);transform:translateY(calc(-50% - 10px))}
+.h2big .h2kiosk{-webkit-mask-image:linear-gradient(180deg,#000 80%,rgba(0,0,0,.35) 93%,transparent 100%)!important;mask-image:linear-gradient(180deg,#000 80%,rgba(0,0,0,.35) 93%,transparent 100%)!important}
+.h2big picture{filter:drop-shadow(0 0 60px rgba(217,164,102,.10))}
+.h2big .h2shadow{left:2%;right:-2%;bottom:2%;height:16%;background:radial-gradient(ellipse at 54% 50%,rgba(0,0,0,.7),rgba(0,0,0,.35) 45%,rgba(0,0,0,0) 72%);filter:blur(4px);z-index:1}
+.h2chip.c1{left:7%;top:15%}.h2chip.c2{right:7%;bottom:14%}
+@media(min-width:901px) and (max-width:1200px){.h2stage.h2big{width:min(46vw,820px)}}
+@media(max-width:900px){
+  .h2stage.h2big{top:112px;right:auto;width:min(calc(100vw - 20px),580px);transform:translateX(-50%)}
+  .hero2 .in{padding-top:calc(130px + min(calc(100vw - 20px),580px)*.66)!important}
+  .h2big .h2shadow{bottom:3%;height:14%}
+  .h2chip.c1{top:0}.h2chip.c2{bottom:12%}
+}
+</style>
+<style>/* intro v2 */
+#intro .ib-kiosk{width:min(540px,82vw)}
+#intro .ib-cap{top:calc(50% + min(540px,82vw)*.39 + 22px)}
+@media(max-width:600px){#intro .ib-kiosk{transform:translateY(-9vh)}#intro .ib-cap{top:calc(50% + min(540px,82vw)*.39 + 22px - 9vh)}}
+</style>
 </head>
 <body data-page="home" data-title="titleHome">
 <div id="intro" aria-hidden="true">
@@ -729,14 +785,17 @@ footer .flogo img{height:104px;width:auto}
     <div class="h2bg" aria-hidden="true"><div class="h2sun"></div><div class="h2lines"></div></div>
     <div class="h2stage h2big" aria-hidden="true">
       <div class="h2pool"></div>
-      <picture><source media="(max-width:900px)" srcset="img/modul-cut2-960.webp"><img class="h2kiosk" src="img/modul-cut2.webp" alt="" width="1431" height="934" fetchpriority="high"></picture>
+      <picture><source media="(max-width:900px)" srcset="img/modul-cut3-960.webp"><img class="h2kiosk" src="img/modul-cut3.webp" alt="" width="1431" height="969" fetchpriority="high"></picture>
       <div class="h2shadow"></div>
+      <div class="h2chip c1"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 21V9l6-4v4l6-4v4l6-4v16z"/></svg></i><span><b data-t="chip1b">Producție proprie</b><small data-t="chip1s">Hala din Miercurea Nirajului</small></span></div>
+      <div class="h2chip c2"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7h18M3 7v10M21 7v10M7 7v3M11 7v4M15 7v3M19 7v4"/></svg></i><span><b data-t="chip2b">La dimensiunile tale</b><small data-t="chip2s">Locuință, birou sau comerț</small></span></div>
     </div>
     <div class="in">
       <div class="eyebrow" data-t="heroEy">Big Big Boon · Construcții modulare · Mureș</div>
       <h1 class="h2title"><span data-t="heroA">Construim</span><span class="rot" id="heroRot" aria-live="polite"><span class="on">case modulare</span></span><em data-t="heroB">din metal și lemn.</em></h1>
-      <p data-t="heroP">Chioșcuri comerciale, case modulare și structuri din metal și lemn — proiectate și construite în hala noastră din Miercurea Nirajului.</p>
+      <p data-t="heroP">Case, birouri și chioșcuri modulare din metal și lemn, la dimensiunile tale — proiectate și construite în hala noastră din Miercurea Nirajului.</p>
       <div class="ctas"><button class="btn p" data-go="contact"><span data-t="ctaQuote">Cere ofertă</span> →</button><a class="btn g" href="#produse" data-t="heroC1">Vezi produsele</a></div>
+      <p class="h2note" data-t="ctaNote">Ofertă gratuită, fără obligații.</p>
       <ul class="h2facts"><li data-t="hf1">Producție proprie în Mureș</li><li data-t="hf2">Dimensiuni la comandă</li><li data-t="hf3">Mobile și demontabile</li></ul>
     </div>
     <div class="h2marq" aria-hidden="true"><div class="tr" id="heroMarq"></div></div>
@@ -916,8 +975,8 @@ addEventListener('pageshow',e=>{if(!location.hash)window.scrollTo(0,0)});
 if(!location.hash)window.scrollTo(0,0);
 /* ---------- i18n (RO is the markup itself) ---------- */
 const T={
-hu:{hoursVal:"Hétfő – Péntek, 08:00 – 16:00",b3d1:"Minden egy szilárd alappal és egy fém- vagy favázzal kezdődik, könnyű szállításra és szerelésre tervezve.",b3d2:"A vázelemek közé szerelt szigetelés több kényelmet ad, minden évszakban.",b3d3:"Fekete lemez falécekkel vagy natúr fa — a megjelenést te választod.",b3d4:"Tolóablak és fa kiszolgálópult, a vevők számára kényelmes magasságban.",b3d5:"Nyeregtető látszó fagerendákkal, amelyek karaktert adnak az építménynek.",b3d6:"Meleg fények belül és a homlokzaton. Az árusítóházad nyitásra kész.",navTeam:"Csapat",navBlog:"Blog",navContact:"Kapcsolat",titleTeam:"Csapat · Big Big Boon",titleBlog:"Blog · Big Big Boon",titleContact:"Kapcsolat · Big Big Boon",b3H:"Görgess, és nézd, ahogy felépül.",b3s1:"Alap és váz",b3s2:"Szigetelés",b3s3:"Falak és burkolat",b3s4:"Ablak és pult",b3s5:"Tető és gerendák",b3s6:"Felkapcsolt fények",tmH:"Az emberek <em>minden építmény mögött.</em>",tmP:"Ismerd meg a csapatot, amely válaszol, tervez és épít — nyárádszeredai csarnokunkban.",tmEy:"Ki mit csinál",tmH2:"Az első telefontól a szerelésig.",r1:"Recepció és iroda",r1p:"Fogadja a megkereséseket, felveszi a telefont, és a megfelelő emberhez irányít.",r2:"Értékesítés és ajánlatok",r2p:"Átbeszéli veled a projektet, és elkészíti a személyre szabott ajánlatot.",r3:"Tervezés",r3p:"Meghatározza a méreteket, az anyagokat és a műszaki részleteket.",r4:"Gyártás",r4p:"A csarnokban elkészíti a szerkezetet, a burkolatot és a felületeket.",r5:"Szállítás és szerelés",r5p:"Leszállítja és felszereli az építményt a helyszínen.",tmName:"Név később",tmNote:"A csapat nevei és fotói a Big Big Boonnal közösen kerülnek fel.",rcEy:"Recepció",rcH:"Itt találsz meg minket.",rcP:"A recepció és a gyártócsarnok Nyárádszereda térségében, Maros megyében található. Hívj előtte, és egyeztetünk egy időpontot.",rcHours:"Nyitvatartás",tbd:"Később",rcDir:"Megnyitás a Google Térképen",cpH:"Beszéljünk <em>a projektedről.</em>",cpP:"Hívj, írj, vagy töltsd ki az űrlapot — személyre szabott ajánlattal válaszolunk.",ccWa:"WhatsApp",blH:"Útmutatók és hírek <em>a csarnokból.</em>",blP:"Gyakorlati tanácsok árusítóházakról, moduláris építményekről, fém- és faszerkezetekről.",blEy:"Cikkek",blMore:"Tovább olvasom →",blBack:"↑ Vissza a cikkekhez",blLang:"A cikkek jelenleg román nyelven érhetők el.",introCap:"Fém és fa. <em>Tartósra építve.</em>",prCta:"Van egy konkrét ötleted? Írd meg, és ajánlatot készítünk",tg3:"Rendezvények",tg2:"Kereskedelem",tg1:"Street-food",sq5:"Tető",sq4:"Ablak és pult",sq3:"Falak",sq2:"Szigetelés",sq1:"Váz",logoSub:"Moduláris építmények",navHome:"Főoldal",navProd:"Termékek",navPrice:"Árak",navAbout:"Rólunk",ctaQuote:"Ajánlatkérés",
-heroEy:"Big Big Boon · Moduláris építmények · Maros",heroH:"Árusítóházak és moduláris házak.<br><em>Fémből és fából, tartósra építve.</em>",heroP:"Árusítóházak, moduláris házak, fém- és faszerkezetek — saját csarnokunkban tervezve és gyártva, Nyárádszeredán.",heroC1:"Termékeink",heroC2:"Tervezd meg a modelled",
+hu:{chip1b:"Saját gyártás",chip1s:"Nyárádszeredai csarnok",chip2b:"Az Ön méreteire",chip2s:"Lakás, iroda vagy üzlet",ctaNote:"Ingyenes ajánlat, kötelezettség nélkül.",hoursVal:"Hétfő – Péntek, 08:00 – 16:00",b3d1:"Minden egy szilárd alappal és egy fém- vagy favázzal kezdődik, könnyű szállításra és szerelésre tervezve.",b3d2:"A vázelemek közé szerelt szigetelés több kényelmet ad, minden évszakban.",b3d3:"Fekete lemez falécekkel vagy natúr fa — a megjelenést te választod.",b3d4:"Tolóablak és fa kiszolgálópult, a vevők számára kényelmes magasságban.",b3d5:"Nyeregtető látszó fagerendákkal, amelyek karaktert adnak az építménynek.",b3d6:"Meleg fények belül és a homlokzaton. Az árusítóházad nyitásra kész.",navTeam:"Csapat",navBlog:"Blog",navContact:"Kapcsolat",titleTeam:"Csapat · Big Big Boon",titleBlog:"Blog · Big Big Boon",titleContact:"Kapcsolat · Big Big Boon",b3H:"Görgess, és nézd, ahogy felépül.",b3s1:"Alap és váz",b3s2:"Szigetelés",b3s3:"Falak és burkolat",b3s4:"Ablak és pult",b3s5:"Tető és gerendák",b3s6:"Felkapcsolt fények",tmH:"Az emberek <em>minden építmény mögött.</em>",tmP:"Ismerd meg a csapatot, amely válaszol, tervez és épít — nyárádszeredai csarnokunkban.",tmEy:"Ki mit csinál",tmH2:"Az első telefontól a szerelésig.",r1:"Recepció és iroda",r1p:"Fogadja a megkereséseket, felveszi a telefont, és a megfelelő emberhez irányít.",r2:"Értékesítés és ajánlatok",r2p:"Átbeszéli veled a projektet, és elkészíti a személyre szabott ajánlatot.",r3:"Tervezés",r3p:"Meghatározza a méreteket, az anyagokat és a műszaki részleteket.",r4:"Gyártás",r4p:"A csarnokban elkészíti a szerkezetet, a burkolatot és a felületeket.",r5:"Szállítás és szerelés",r5p:"Leszállítja és felszereli az építményt a helyszínen.",tmName:"Név később",tmNote:"A csapat nevei és fotói a Big Big Boonnal közösen kerülnek fel.",rcEy:"Recepció",rcH:"Itt találsz meg minket.",rcP:"A recepció és a gyártócsarnok Nyárádszereda térségében, Maros megyében található. Hívj előtte, és egyeztetünk egy időpontot.",rcHours:"Nyitvatartás",tbd:"Később",rcDir:"Megnyitás a Google Térképen",cpH:"Beszéljünk <em>a projektedről.</em>",cpP:"Hívj, írj, vagy töltsd ki az űrlapot — személyre szabott ajánlattal válaszolunk.",ccWa:"WhatsApp",blH:"Útmutatók és hírek <em>a csarnokból.</em>",blP:"Gyakorlati tanácsok árusítóházakról, moduláris építményekről, fém- és faszerkezetekről.",blEy:"Cikkek",blMore:"Tovább olvasom →",blBack:"↑ Vissza a cikkekhez",blLang:"A cikkek jelenleg román nyelven érhetők el.",introCap:"Fém és fa. <em>Tartósra építve.</em>",prCta:"Van egy konkrét ötleted? Írd meg, és ajánlatot készítünk",tg3:"Rendezvények",tg2:"Kereskedelem",tg1:"Street-food",sq5:"Tető",sq4:"Ablak és pult",sq3:"Falak",sq2:"Szigetelés",sq1:"Váz",logoSub:"Moduláris építmények",navHome:"Főoldal",navProd:"Termékek",navPrice:"Árak",navAbout:"Rólunk",ctaQuote:"Ajánlatkérés",
+heroEy:"Big Big Boon · Moduláris építmények · Maros",heroH:"Árusítóházak és moduláris házak.<br><em>Fémből és fából, tartósra építve.</em>",heroP:"Moduláris házak, irodák és árusítóházak fémből és fából, az Ön méreteire — saját csarnokunkban tervezve és gyártva, Nyárádszeredán.",heroC1:"Termékeink",heroC2:"Tervezd meg a modelled",
 s1:"Saját gyártás, saját csarnokban",s2:"Fém és fa, egyben",s3:"Moduláris és bővíthető",s4:"Szállításra és szerelésre tervezve",
 prEy:"Amit építünk",prH:"Négy irány, egy műhely.",prP:"A fém erejét a fa melegségével ötvözzük. Minden projekt a te igényeidből indul.",
 p1h:"Árusító- és vásári házak",p1p:"Mobil kereskedelmi egységek vásárokra, fesztiválokra és teraszokra — könnyen szállítható, szerelhető, bontható és újrahasznosítható.",
@@ -946,8 +1005,8 @@ paB:"Gyártási partnert vagy helyet keresel a projektedhez?",paC:"Beszéljünk"
 ctEy:"Kapcsolat",ctH:"Van egy projekted? Építsük meg.",ctP:"Írd meg, mire van szükséged — személyre szabott ajánlattal válaszolunk.",ciPhone:"Telefon",ciAddr:"Cím",
 fmName:"Név",fmPhone:"Telefon",fmType:"Mi érdekel",o1:"Árusító- / vásári ház",o2:"Moduláris ház vagy épület",o3:"Fém- vagy faszerkezet",o4:"Egyedi termék",o5:"Más",fmMsg:"Üzenet",fmMsgP:"Méretek, darabszám, határidő, helyszín…",fmSend:"Küldés →",fmNote:"Az ajánlat ingyenes és kötelezettségmentes.",fmDone:"Köszönjük! Az online űrlap hamarosan aktív lesz.",
 ftPages:"Oldalak",ftProd:"Termékek",ftC:"Weboldal: OHI Solutions",cfgMsg:"Konfiguráció: ",titleHome:"Big Big Boon (BBB) · Moduláris építmények",titlePrice:"Árak (béta) · Big Big Boon",titleAbout:"Rólunk · Big Big Boon"},
-en:{hoursVal:"Monday – Friday, 08:00 – 16:00",b3d1:"It all starts with a solid base and a metal or wooden frame, designed for easy transport and assembly.",b3d2:"Insulation fitted between the studs adds comfort in every season.",b3d3:"Black metal with wooden slats, or natural wood — you choose the look.",b3d4:"A sliding window and wooden serving counter, at the right height for customers.",b3d5:"A gable roof with exposed timber beams that give the building its character.",b3d6:"Warm lights inside and on the front. Your kiosk is ready to open.",navTeam:"Team",navBlog:"Blog",navContact:"Contact",titleTeam:"Team · Big Big Boon",titleBlog:"Blog · Big Big Boon",titleContact:"Contact · Big Big Boon",b3H:"Scroll and watch it build itself.",b3s1:"Base and frame",b3s2:"Insulation",b3s3:"Walls and cladding",b3s4:"Window and counter",b3s5:"Roof and beams",b3s6:"Lights on",tmH:"The people <em>behind every build.</em>",tmP:"Meet the team that answers, designs and builds — in our hall near Miercurea Nirajului.",tmEy:"Who does what",tmH2:"From the first call to installation.",r1:"Reception and office",r1p:"Takes your enquiry, answers the phone and puts you in touch with the right person.",r2:"Sales and quotes",r2p:"Talks your project through with you and prepares a custom quote.",r3:"Design",r3p:"Sets the dimensions, materials and technical details.",r4:"Production",r4p:"Builds the structure, cladding and finishes in our hall.",r5:"Transport and installation",r5p:"Delivers the building and installs it on site.",tmName:"Name to be added",tmNote:"Team names and photos will be added together with Big Big Boon.",rcEy:"Reception",rcH:"Where to find us.",rcP:"Our reception and production hall are near Miercurea Nirajului, Mureș County. Call ahead and we will set up a meeting.",rcHours:"Opening hours",tbd:"To be added",rcDir:"Open in Google Maps",cpH:"Let's talk about <em>your project.</em>",cpP:"Call, write or fill in the form — we'll reply with a custom quote.",ccWa:"WhatsApp",blH:"Guides and news <em>from the hall.</em>",blP:"Practical advice on kiosks, modular buildings and metal and wooden structures.",blEy:"Articles",blMore:"Read more →",blBack:"↑ Back to articles",blLang:"Articles are currently available in Romanian.",introCap:"Metal and wood. <em>Built to last.</em>",prCta:"Have something specific in mind? Tell us and we'll quote it",tg3:"Events",tg2:"Retail",tg1:"Street food",sq5:"Roof",sq4:"Window & counter",sq3:"Walls",sq2:"Insulation",sq1:"Frame",logoSub:"Modular buildings",navHome:"Home",navProd:"Products",navPrice:"Pricing",navAbout:"About us",ctaQuote:"Get a quote",
-heroEy:"Big Big Boon · Modular buildings · Mureș",heroH:"Kiosks and modular buildings.<br><em>Metal and wood, built to last.</em>",heroP:"Retail kiosks, modular homes and metal and wooden structures — designed and built in our own hall in Miercurea Nirajului.",heroC1:"See products",heroC2:"Build your model",
+en:{chip1b:"Built in-house",chip1s:"Our hall in Miercurea Nirajului",chip2b:"Built to your size",chip2s:"Home, office or retail",ctaNote:"Free quote, no obligation.",hoursVal:"Monday – Friday, 08:00 – 16:00",b3d1:"It all starts with a solid base and a metal or wooden frame, designed for easy transport and assembly.",b3d2:"Insulation fitted between the studs adds comfort in every season.",b3d3:"Black metal with wooden slats, or natural wood — you choose the look.",b3d4:"A sliding window and wooden serving counter, at the right height for customers.",b3d5:"A gable roof with exposed timber beams that give the building its character.",b3d6:"Warm lights inside and on the front. Your kiosk is ready to open.",navTeam:"Team",navBlog:"Blog",navContact:"Contact",titleTeam:"Team · Big Big Boon",titleBlog:"Blog · Big Big Boon",titleContact:"Contact · Big Big Boon",b3H:"Scroll and watch it build itself.",b3s1:"Base and frame",b3s2:"Insulation",b3s3:"Walls and cladding",b3s4:"Window and counter",b3s5:"Roof and beams",b3s6:"Lights on",tmH:"The people <em>behind every build.</em>",tmP:"Meet the team that answers, designs and builds — in our hall near Miercurea Nirajului.",tmEy:"Who does what",tmH2:"From the first call to installation.",r1:"Reception and office",r1p:"Takes your enquiry, answers the phone and puts you in touch with the right person.",r2:"Sales and quotes",r2p:"Talks your project through with you and prepares a custom quote.",r3:"Design",r3p:"Sets the dimensions, materials and technical details.",r4:"Production",r4p:"Builds the structure, cladding and finishes in our hall.",r5:"Transport and installation",r5p:"Delivers the building and installs it on site.",tmName:"Name to be added",tmNote:"Team names and photos will be added together with Big Big Boon.",rcEy:"Reception",rcH:"Where to find us.",rcP:"Our reception and production hall are near Miercurea Nirajului, Mureș County. Call ahead and we will set up a meeting.",rcHours:"Opening hours",tbd:"To be added",rcDir:"Open in Google Maps",cpH:"Let's talk about <em>your project.</em>",cpP:"Call, write or fill in the form — we'll reply with a custom quote.",ccWa:"WhatsApp",blH:"Guides and news <em>from the hall.</em>",blP:"Practical advice on kiosks, modular buildings and metal and wooden structures.",blEy:"Articles",blMore:"Read more →",blBack:"↑ Back to articles",blLang:"Articles are currently available in Romanian.",introCap:"Metal and wood. <em>Built to last.</em>",prCta:"Have something specific in mind? Tell us and we'll quote it",tg3:"Events",tg2:"Retail",tg1:"Street food",sq5:"Roof",sq4:"Window & counter",sq3:"Walls",sq2:"Insulation",sq1:"Frame",logoSub:"Modular buildings",navHome:"Home",navProd:"Products",navPrice:"Pricing",navAbout:"About us",ctaQuote:"Get a quote",
+heroEy:"Big Big Boon · Modular buildings · Mureș",heroH:"Kiosks and modular buildings.<br><em>Metal and wood, built to last.</em>",heroP:"Modular homes, offices and kiosks in metal and wood, built to your size — designed and made in our own hall in Miercurea Nirajului.",heroC1:"See products",heroC2:"Build your model",
 s1:"Made in-house, in our own hall",s2:"Metal and wood, combined",s3:"Modular and expandable",s4:"Designed for transport and assembly",
 prEy:"What we build",prH:"Four directions, one workshop.",prP:"We combine the strength of metal with the warmth of wood. Every project starts from what you need.",
 p1h:"Kiosks and market stalls",p1p:"Mobile retail units for markets, festivals and terraces — easy to transport, assemble, dismantle and reuse.",

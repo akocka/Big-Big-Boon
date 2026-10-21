@@ -538,6 +538,21 @@ footer .flogo img{height:104px;width:auto}
 <link rel="manifest" href="/site.webmanifest">
 <meta name="theme-color" content="#111113">
 <meta property="og:site_name" content="Big Big Boon">
+<style>
+/* intro: house centred, logo small and quiet at the bottom */
+#intro{gap:0}
+#intro .ib-kiosk{width:min(460px,82vw)}
+#intro .ib-cap{position:absolute;left:24px;right:24px;top:calc(50% + min(460px,82vw)*.39 + 22px)}
+#intro .ib-logo{position:absolute;left:50%;bottom:calc(30px + env(safe-area-inset-bottom,0px));transform:translateX(-50%)}
+#intro .ib-real{width:min(26vw,96px)!important;animation:ibLogo .9s 2.3s forwards!important}
+@keyframes ibLogo{from{opacity:0;transform:translateY(8px)}to{opacity:.72;transform:none}}
+@media(max-width:600px){#intro .ib-logo{bottom:calc(84px + env(safe-area-inset-bottom,0px))}}
+</style>
+<style>/* intro v2 */
+#intro .ib-kiosk{width:min(540px,82vw)}
+#intro .ib-cap{top:calc(50% + min(540px,82vw)*.39 + 22px)}
+@media(max-width:600px){#intro .ib-kiosk{transform:translateY(-9vh)}#intro .ib-cap{top:calc(50% + min(540px,82vw)*.39 + 22px - 9vh)}}
+</style>
 </head>
 <body data-page="pricing" data-title="titlePrice">
 <div id="intro" aria-hidden="true">
