@@ -713,6 +713,43 @@ body.intro-on .h2chip{animation-play-state:paused}
 #intro .ib-cap{top:calc(50% + min(540px,82vw)*.39 + 22px)}
 @media(max-width:600px){#intro .ib-kiosk{transform:translateY(-9vh)}#intro .ib-cap{top:calc(50% + min(540px,82vw)*.39 + 22px - 9vh)}}
 </style>
+<style>
+/* hero v4: building stands on the ground, glass glints, warm dust, living buttons */
+.h2big .h2kiosk{-webkit-mask-image:none!important;mask-image:none!important;animation:kioskIn 1.4s .5s cubic-bezier(.16,1,.3,1) forwards!important}
+.h2big .h2shadow{left:4%;right:2%;bottom:-1.5%;height:7%;background:radial-gradient(ellipse at 52% 50%,rgba(0,0,0,.85),rgba(0,0,0,.45) 40%,rgba(0,0,0,0) 72%);filter:blur(3px);z-index:1}
+.h2ground{position:absolute;z-index:0;left:-22%;right:-18%;bottom:-16%;height:34%;pointer-events:none;
+  background:radial-gradient(ellipse at 54% 40%,rgba(255,190,120,.20),rgba(217,164,102,.07) 38%,rgba(15,16,18,0) 68%),
+  repeating-linear-gradient(90deg,rgba(217,164,102,.10) 0 1px,transparent 1px 46px),repeating-linear-gradient(0deg,rgba(217,164,102,.10) 0 1px,transparent 1px 22px);
+  transform:perspective(500px) rotateX(58deg);transform-origin:50% 0;
+  -webkit-mask-image:radial-gradient(ellipse at 52% 30%,#000 25%,transparent 70%);mask-image:radial-gradient(ellipse at 52% 30%,#000 25%,transparent 70%)}
+.h2big::before,.h2big::after{display:none!important}
+/* glass glint sweeping across the windows */
+.h2glass{position:absolute;z-index:3;inset:0;pointer-events:none;overflow:hidden;mix-blend-mode:screen}
+.h2glass.g1{clip-path:polygon(43.5% 40%,63% 36.5%,63% 79%,43.5% 77%)}
+.h2glass.g2{clip-path:polygon(65.5% 37%,79.5% 41%,79.5% 75.5%,65.5% 79%)}
+.h2glass.g3{clip-path:polygon(21% 44%,33% 42%,33% 85%,21% 81%)}
+.h2glass i{position:absolute;top:-10%;bottom:-10%;width:9%;left:-20%;background:linear-gradient(90deg,rgba(255,240,215,0),rgba(255,240,215,.55) 45%,rgba(255,255,255,.85) 50%,rgba(255,240,215,.55) 55%,rgba(255,240,215,0));transform:skewX(-18deg);filter:blur(2px);animation:glint 7s 2.6s cubic-bezier(.45,0,.2,1) infinite}
+.h2glass.g2 i{animation-delay:3.05s}.h2glass.g3 i{animation-delay:2.2s}
+@keyframes glint{0%{left:-20%;opacity:0}6%{opacity:1}26%{left:110%;opacity:1}27%,100%{left:110%;opacity:0}}
+/* twinkling sparks on window corners */
+.spk{position:absolute;z-index:4;left:var(--x);top:var(--y);width:calc(26px * var(--s,1));height:calc(26px * var(--s,1));margin:calc(-13px * var(--s,1)) 0 0 calc(-13px * var(--s,1));pointer-events:none;opacity:0;animation:spk 5.6s var(--d) ease-in-out infinite;animation-delay:calc(var(--d) + 2.8s)}
+.spk::before,.spk::after{content:"";position:absolute;left:50%;top:50%;width:100%;height:2px;margin:-1px 0 0 -50%;border-radius:2px;background:linear-gradient(90deg,transparent,#FFF4DE,transparent);box-shadow:0 0 8px rgba(255,214,150,.9)}
+.spk::after{transform:rotate(90deg)}
+@keyframes spk{0%,100%{opacity:0;transform:scale(.3) rotate(0)}12%{opacity:1;transform:scale(1) rotate(45deg)}24%{opacity:0;transform:scale(.4) rotate(90deg)}}
+/* warm dust drifting in the hero */
+.h2dust{position:absolute;inset:0;overflow:hidden}
+.h2dust i{position:absolute;bottom:-10px;left:var(--l);width:var(--z);height:var(--z);border-radius:50%;background:rgba(255,200,140,.75);box-shadow:0 0 10px rgba(255,180,100,.8);opacity:0;animation:dust var(--t) var(--dl) linear infinite}
+@keyframes dust{0%{transform:translate(0,0);opacity:0}10%{opacity:var(--o)}85%{opacity:var(--o)}100%{transform:translate(var(--dx),-75vh);opacity:0}}
+/* buttons: shine sweep + magnetic follow */
+.btn.p{position:relative;overflow:hidden;isolation:isolate}
+.btn.p::after{content:"";position:absolute;z-index:-1;top:0;bottom:0;left:-60%;width:40%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.38),transparent);transform:skewX(-20deg);animation:btnShine 4.5s 3s ease-in-out infinite}
+@keyframes btnShine{0%,62%{left:-60%}82%,100%{left:130%}}
+.btn.p:hover{box-shadow:0 14px 40px rgba(184,118,61,.55)}
+.btn[data-magged]{transition:transform .5s cubic-bezier(.22,1,.36,1),background .2s,box-shadow .2s}
+body.intro-on .h2glass i,body.intro-on .spk,body.intro-on .h2dust i{animation-play-state:paused}
+@media(max-width:900px){.h2ground{bottom:-12%;height:28%}}
+@media(prefers-reduced-motion:reduce){.h2glass,.spk,.h2dust{display:none}.btn.p::after{animation:none;display:none}}
+</style>
 </head>
 <body data-page="home" data-title="titleHome">
 <div id="intro" aria-hidden="true">
@@ -782,11 +819,14 @@ body.intro-on .h2chip{animation-play-state:paused}
 <main>
 
   <section class="hero hero2" id="acasa">
-    <div class="h2bg" aria-hidden="true"><div class="h2sun"></div><div class="h2lines"></div></div>
+    <div class="h2bg" aria-hidden="true"><div class="h2sun"></div><div class="h2lines"></div><div class="h2dust" id="h2dust"></div></div>
     <div class="h2stage h2big" aria-hidden="true">
       <div class="h2pool"></div>
       <picture><source media="(max-width:900px)" srcset="img/modul-cut3-960.webp"><img class="h2kiosk" src="img/modul-cut3.webp" alt="" width="1431" height="969" fetchpriority="high"></picture>
       <div class="h2shadow"></div>
+      <div class="h2ground"></div>
+      <div class="h2glass g1"><i></i></div><div class="h2glass g2"><i></i></div><div class="h2glass g3"><i></i></div>
+      <span class="spk" style="--x:63.5%;--y:37.5%;--d:0s"></span><span class="spk" style="--x:79%;--y:41%;--d:1.6s;--s:.8"></span><span class="spk" style="--x:44%;--y:76%;--d:3.1s;--s:.7"></span><span class="spk" style="--x:33%;--y:44.5%;--d:4.4s;--s:.65"></span>
       <div class="h2chip c1"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 21V9l6-4v4l6-4v4l6-4v16z"/></svg></i><span><b data-t="chip1b">Producție proprie</b><small data-t="chip1s">Hala din Miercurea Nirajului</small></span></div>
       <div class="h2chip c2"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7h18M3 7v10M21 7v10M7 7v3M11 7v4M15 7v3M19 7v4"/></svg></i><span><b data-t="chip2b">La dimensiunile tale</b><small data-t="chip2s">Locuință, birou sau comerț</small></span></div>
     </div>
@@ -1740,6 +1780,19 @@ try{ if(typeof T!=='undefined'){T.hu=T.hu||{};T.en=T.en||{};T.hu.abtMore='Tudj m
       say(msg("done"),"var(--wood2)");btn.textContent="✓";
     }catch(x){sent=false;btn.disabled=false;btn.textContent=old;say(msg("err"),"#ff8a7a")}
   };
+})();
+</script>
+<script>
+/* hero dust particles + magnetic buttons (desktop pointer only) */
+(function(){
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const d=document.getElementById('h2dust');
+  if(d&&!reduce){const n=innerWidth<700?14:26;let h='';for(let i=0;i<n;i++){const z=(1.5+Math.random()*2.5).toFixed(1)+'px';
+    h+=`<i style="--l:${(Math.random()*100).toFixed(1)}%;--z:${z};--t:${(9+Math.random()*10).toFixed(1)}s;--dl:${(-Math.random()*18).toFixed(1)}s;--dx:${(Math.random()*80-40).toFixed(0)}px;--o:${(.25+Math.random()*.5).toFixed(2)}"></i>`}d.innerHTML=h}
+  if(reduce||!matchMedia('(pointer: fine)').matches)return;
+  document.querySelectorAll('.btn').forEach(b=>{b.dataset.magged='1';
+    b.addEventListener('pointermove',e=>{const r=b.getBoundingClientRect(),x=e.clientX-r.left-r.width/2,y=e.clientY-r.top-r.height/2;b.style.transform=`translate(${x*.22}px,${y*.3}px)`});
+    b.addEventListener('pointerleave',()=>{b.style.transform=''})});
 })();
 </script>
 </body>
