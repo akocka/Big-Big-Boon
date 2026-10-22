@@ -750,6 +750,18 @@ body.intro-on .h2glass i,body.intro-on .spk,body.intro-on .h2dust i{animation-pl
 @media(max-width:900px){.h2ground{bottom:-12%;height:28%}}
 @media(prefers-reduced-motion:reduce){.h2glass,.spk,.h2dust{display:none}.btn.p::after{animation:none;display:none}}
 </style>
+<style>
+/* hero v5: real ground plane in the photo's perspective (footprint, contact shadow, window light on the ground) */
+.h2floor{position:absolute;z-index:1;left:0;top:0;width:100%;height:auto;overflow:visible;pointer-events:none;opacity:0;animation:floorIn 1.4s .5s ease forwards}
+.h2floor .spl{animation:spill 7s 2.6s ease-in-out infinite}
+@keyframes floorIn{to{opacity:1}}
+@keyframes spill{0%,100%{opacity:var(--o,.2)}50%{opacity:calc(var(--o,.2) * 1.35)}}
+.h2big .h2kiosk{transform:none!important;animation:floorIn 1.4s .5s ease forwards!important}
+.h2big picture{filter:none!important}
+.h2big .h2shadow,.h2big .h2ground{display:none!important}
+.h2big .h2pool{bottom:24%!important}
+@media(prefers-reduced-motion:reduce){.h2floor{opacity:1;animation:none}.h2floor .spl{animation:none}}
+</style>
 </head>
 <body data-page="home" data-title="titleHome">
 <div id="intro" aria-hidden="true">
@@ -822,6 +834,18 @@ body.intro-on .h2glass i,body.intro-on .spk,body.intro-on .h2dust i{animation-pl
     <div class="h2bg" aria-hidden="true"><div class="h2sun"></div><div class="h2lines"></div><div class="h2dust" id="h2dust"></div></div>
     <div class="h2stage h2big" aria-hidden="true">
       <div class="h2pool"></div>
+      <svg class="h2floor" viewBox="0 0 1431 1250" preserveAspectRatio="xMidYMin meet" aria-hidden="true">
+        <defs><filter id="fb1" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="75"/></filter><filter id="fb2" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="9"/></filter><filter id="fb4" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="26"/></filter><filter id="fb3" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="2.5"/></filter>
+        <radialGradient id="fg" cx="0.660" cy="0.717" r=".62"><stop offset="0" stop-color="#3a2c20"/><stop offset=".45" stop-color="#241c16"/><stop offset="1" stop-color="#151311" stop-opacity="0"/></radialGradient>
+        <linearGradient id="sp" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffc98a" stop-opacity=".55"/><stop offset="1" stop-color="#ffb060" stop-opacity="0"/></linearGradient></defs>
+        <polygon points="345,417 -440,726 1130,1123 1915,814" fill="url(#fg)" filter="url(#fb1)" opacity=".95"/>
+        <polygon points="510,565 56,745 965,975 1419,795" fill="#2a2420" opacity=".6" filter="url(#fb4)"/>
+        <polygon class="spl" points="366,810 548,856 457,892 275,846" fill="#ffbe78" opacity=".26" style="--o:.26" filter="url(#fb4)"/>
+        <polygon class="spl" points="614,872 919,950 795,999 490,921" fill="#ffbe78" opacity=".3" style="--o:.3" filter="url(#fb4)"/>
+        <polygon class="spl" points="965,948 1254,834 1419,876 1130,990" fill="#ffbe78" opacity=".34" style="--o:.34" filter="url(#fb4)"/>
+        <polygon points="527,580 106,747 948,960 1369,793" fill="#000" opacity=".85" filter="url(#fb2)"/>
+        <polyline points="118,747 944,956 1357,793" fill="none" stroke="#000" stroke-width="14" stroke-linejoin="round" opacity=".9" filter="url(#fb3)" transform="translate(0,4)"/>
+      </svg>
       <picture><source media="(max-width:900px)" srcset="img/modul-cut3-960.webp"><img class="h2kiosk" src="img/modul-cut3.webp" alt="" width="1431" height="969" fetchpriority="high"></picture>
       <div class="h2shadow"></div>
       <div class="h2ground"></div>
