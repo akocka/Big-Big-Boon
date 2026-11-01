@@ -558,6 +558,17 @@ footer .flogo img{height:104px;width:auto}
 </style>
 <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>
 <script defer src="/_vercel/insights/script.js"></script>
+<style id="psfix">
+/* accessibility: wood tones that pass WCAG AA contrast (4.5:1) on light backgrounds */
+:root{--wood:#8F5628}
+.dark,footer,#intro,.hero,.sub-hero,.b3,.quote,.k3{--wood:#D9A466}
+.b3-list li{color:#A3A8AF}
+.btn.p{background:#94592A;box-shadow:0 10px 30px rgba(148,89,42,.32)}
+/* touch targets at least 24px tall */
+.more,.backl,.ulink{display:inline-flex;align-items:center;min-height:24px}
+footer h3.fh{font:700 12px var(--fd);letter-spacing:.16em;text-transform:uppercase;color:#fff;margin-bottom:14px}
+.tm b{color:#5E636B}
+</style>
 </head>
 <body data-page="contact" data-title="titleContact">
 <div id="intro" aria-hidden="true">
@@ -705,8 +716,8 @@ footer .flogo img{height:104px;width:auto}
         <a class="ftsoc" href="https://www.facebook.com/share/1BUe2rWH3J/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9v2.3H8v3h2.5V21z"/></svg>Facebook</a>
         <p class="tagl" data-t="viQplain">Metal și lemn. Soluții modulare. Construim viitorul împreună.</p>
       </div>
-      <div><h4 data-t="ftPages">Pagini</h4><a href="index.html" data-t="navHome">Acasă</a><a href="index.html#produse" data-t="navProd">Produse</a><a href="preturi.html" data-t="navPrice">Prețuri</a><a href="despre.html" data-t="navAbout">Despre noi</a><a href="echipa.html" data-t="navTeam">Echipa</a><a href="blog.html" data-t="navBlog">Blog</a><a href="contact.html" data-t="navContact">Contact</a></div>
-      <div><h4 data-t="ftProd">Produse</h4><a href="index.html#produse" data-t="p1h">Chioșcuri și căsuțe comerciale</a><a href="index.html#produse" data-t="p2h">Case și clădiri modulare</a><a href="index.html#produse" data-t="p3h">Structuri metalice și din lemn</a><a href="index.html#produse" data-t="p4h">Produse personalizate</a></div>
+      <div><h3 class="fh" data-t="ftPages">Pagini</h3><a href="index.html" data-t="navHome">Acasă</a><a href="index.html#produse" data-t="navProd">Produse</a><a href="preturi.html" data-t="navPrice">Prețuri</a><a href="despre.html" data-t="navAbout">Despre noi</a><a href="echipa.html" data-t="navTeam">Echipa</a><a href="blog.html" data-t="navBlog">Blog</a><a href="contact.html" data-t="navContact">Contact</a></div>
+      <div><h3 class="fh" data-t="ftProd">Produse</h3><a href="index.html#produse" data-t="p1h">Chioșcuri și căsuțe comerciale</a><a href="index.html#produse" data-t="p2h">Case și clădiri modulare</a><a href="index.html#produse" data-t="p3h">Structuri metalice și din lemn</a><a href="index.html#produse" data-t="p4h">Produse personalizate</a></div>
     </div>
     <div class="bot"><span>© 2026 BIG BIG BOON 2020 SRL · CUI 43611636</span><span data-t="ftC">Website realizat de <a href="https://ohis-gamma.vercel.app" target="_blank" rel="noopener">OHI Solutions</a></span></div>
   </div>
@@ -978,7 +989,7 @@ if(saved!=='ro')setLang(saved);
   function msg(k){return M[L()][k]}
   var form=document.getElementById("form"),btn=document.getElementById("fSend"),note=document.getElementById("fNote");
   if(!form||!btn||!note)return;
-  var hp=document.createElement("input");hp.name="company_site";hp.tabIndex=-1;hp.autocomplete="off";hp.setAttribute("aria-hidden","true");
+  var hp=document.createElement("input");hp.name="company_site";hp.tabIndex=-1;hp.autocomplete="off";hp.setAttribute("aria-hidden","true");hp.setAttribute("aria-label","Nu completați acest câmp");
   hp.style.cssText="position:absolute;left:-9999px;width:1px;height:1px;opacity:0";form.appendChild(hp);
   var priv=document.createElement("p");priv.className="note";priv.style.cssText="opacity:.7;font-size:12.5px;margin-top:4px";form.appendChild(priv);
   function setPriv(){priv.textContent=msg("priv")}setPriv();
