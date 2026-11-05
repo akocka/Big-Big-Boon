@@ -823,6 +823,7 @@ body.intro-on .hero .in>*,body.intro-on .hero2 .h2kiosk,body.intro-on .hero2 .h2
   <p class="ib-cap" data-t="introCap">Metal și lemn. <em>Construit să dureze.</em></p>
   <button type="button" class="ib-skip" id="iskip"><span data-t="k3skip">Sari peste</span> →</button>
 </div>
+<script>window.__introT0=performance.now()</script>
 
 <header id="hdr">
   <a class="logo" href="index.html" aria-label="Big Big Boon">
@@ -1263,7 +1264,7 @@ applyCfg();render(0);buildStep(0);
 (function(){
   const el=$('intro');if(!el)return;
   let seen=false;try{seen=sessionStorage.getItem('bbb-intro')==='1'}catch(e){}
-  if(seen||matchMedia('(prefers-reduced-motion:reduce)').matches||/nointro/.test(location.search)){el.remove();document.body.classList.remove('intro-on');return}
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches||/nointro/.test(location.search)){el.remove();document.body.classList.remove('intro-on');return}
   document.body.classList.add('intro-on');
   const end=()=>{if(!el.isConnected||el.classList.contains('out'))return;el.classList.add('out');document.body.classList.remove('intro-on');try{sessionStorage.setItem('bbb-intro','1')}catch(e){}setTimeout(()=>el.remove(),900)};
   $('iskip').onclick=end;el.addEventListener('click',e=>{if(e.target===el)end()});setTimeout(end,3700);
@@ -1853,5 +1854,6 @@ try{ if(typeof T!=='undefined'){T.hu=T.hu||{};T.en=T.en||{};T.hu.abtMore='Tudj m
     b.addEventListener('pointerleave',()=>{b.style.transform=''})});
 })();
 </script>
+<script defer src="intro-sound.js"></script>
 </body>
 </html>
