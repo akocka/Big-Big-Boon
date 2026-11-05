@@ -474,14 +474,19 @@ body.inbuild .mcta{transform:translateY(90px)!important}
 .tm .role{font:700 12px var(--fd);letter-spacing:.14em;text-transform:uppercase;color:var(--wood)}
 .tm b{font:700 17px var(--fd);margin-top:6px;color:#9a9ea4;border-bottom:1.5px dashed var(--wood);align-self:flex-start}
 .tm p{color:var(--mut);font-size:14.5px;margin-top:10px}
-.tm-lead{display:flex;align-items:center;gap:26px;margin-top:40px;padding:28px;border-radius:26px;background:var(--card);border:1px solid var(--line);box-shadow:0 30px 60px -40px rgba(0,0,0,.35)}
-.tl-av{flex:none;width:104px;height:104px;border-radius:50%;display:grid;place-items:center;font:800 30px var(--fd);letter-spacing:.04em;color:#fff;background:linear-gradient(135deg,#C17E43,#8F5628);box-shadow:inset 0 0 0 4px rgba(255,255,255,.18)}
+.tm-lead{display:flex;align-items:center;gap:32px;margin-top:40px;padding:28px;border-radius:26px;background:var(--card);border:1px solid var(--line);box-shadow:0 30px 60px -40px rgba(0,0,0,.35)}
+.tl-ph{flex:none;position:relative;width:190px;aspect-ratio:4/5;border-radius:18px;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:#fff;background:linear-gradient(160deg,#C17E43,#8F5628 70%,#6d3f1a);box-shadow:0 24px 40px -24px rgba(0,0,0,.5)}
+.tl-ph::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.08) 1px,transparent 1px);background-size:22px 22px}
+.tl-ph::after{content:"";position:absolute;inset:10px;border:1px solid rgba(255,255,255,.28);border-radius:12px}
+.tl-ph span{position:relative;font:800 42px var(--fd);letter-spacing:.04em}
+.tl-ph small{position:relative;font:600 11px var(--fd);letter-spacing:.14em;text-transform:uppercase;opacity:.8}
+.tl-ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .tm-lead .role{font:700 12px var(--fd);letter-spacing:.14em;text-transform:uppercase;color:var(--wood)}
 .tm-lead h3{margin-top:6px;font:800 clamp(22px,2.4vw,28px)/1.15 var(--fd)}
 .tm-lead p{margin-top:8px;color:var(--mut);font-size:15px;max-width:52ch}
 .tl-mail{display:inline-block;margin-top:10px;font-weight:600;color:var(--wood);word-break:break-all}
 .tm-lead+.team{margin-top:16px}
-@media(max-width:560px){.tm-lead{flex-direction:column;align-items:flex-start;gap:16px;padding:22px}.tl-av{width:80px;height:80px;font-size:24px}}
+@media(max-width:560px){.tm-lead{flex-direction:column;align-items:flex-start;gap:18px;padding:20px}.tl-ph{width:100%;aspect-ratio:4/3}}
 .tm-note{margin-top:22px;color:var(--mut);font-size:14px}
 @media(max-width:1000px){.team{grid-template-columns:1fr 1fr}}
 @media(max-width:560px){.team{grid-template-columns:1fr}}
@@ -578,6 +583,7 @@ footer h3.fh{font:700 12px var(--fd);letter-spacing:.16em;text-transform:upperca
 .tm b{color:#5E636B}
 @media (max-width:700px){.hero .bgimg[style*="g-hala-big-big-boon-la-apus-1200"]{background-image:url(img/g-hala-big-big-boon-la-apus-600.webp)!important}}
 </style>
+<link rel="stylesheet" href="motion.css">
 </head>
 <body data-page="team" data-title="titleTeam">
 <div id="intro" aria-hidden="true">
@@ -657,7 +663,7 @@ footer h3.fh{font:700 12px var(--fd);letter-spacing:.16em;text-transform:upperca
     <div class="wrap">
       <div class="eyebrow rv" data-t="tmEy">Cine face ce</div>
       <h2 class="h2 rv" data-t="tmH2">De la primul telefon până la montaj.</h2>
-      <article class="tm-lead rv"><div class="tl-av" aria-hidden="true">BA</div><div class="tl-t"><div class="role" data-t="fdRole">Fondator și administrator</div><h3>Barabási Attila Csaba</h3><p data-t="fdP">Fondatorul Big Big Boon. Pentru proiecte mai mari sau colaborări, îi poți scrie direct.</p><a class="tl-mail" href="mailto:barabasiattila@bigbigboon.ro">barabasiattila@bigbigboon.ro</a></div></article>
+      <article class="tm-lead rv"><div class="tl-ph" aria-hidden="true"><span>BA</span><small>Fotografie în curând</small></div><div class="tl-t"><div class="role" data-t="fdRole">Fondator și administrator</div><h3>Barabási Attila Csaba</h3><p data-t="fdP">Fondatorul Big Big Boon. Pentru proiecte mai mari sau colaborări, îi poți scrie direct.</p><a class="tl-mail" href="mailto:barabasiattila@bigbigboon.ro">barabasiattila@bigbigboon.ro</a></div></article>
       <div class="team">
         <article class="tm rv"><div class="av"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg></div><div class="role" data-t="r1">Recepție și birou</div><b data-t="tmName">Nume de completat</b><p data-t="r1p">Primește cererile, răspunde la telefon și te ajută să ajungi la persoana potrivită.</p></article>
         <article class="tm rv"><div class="av"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg></div><div class="role" data-t="r2">Vânzări și oferte</div><b data-t="tmName">Nume de completat</b><p data-t="r2p">Discută proiectul cu tine și pregătește oferta personalizată.</p></article>
@@ -1033,5 +1039,6 @@ if(saved!=='ro')setLang(saved);
 try{Object.assign(T.hu,{mapShow:"Térkép megjelenítése",mapNote:"A térkép csak kattintás után töltődik be a Google-tól."});Object.assign(T.en,{mapShow:"Show the map",mapNote:"The map loads from Google only after you tap."});RO.mapShow=RO.mapShow||"Arată harta";RO.mapNote=RO.mapNote||"Harta se încarcă de la Google doar după ce apeși.";if(typeof LANG!=="undefined"&&LANG!=="ro"&&typeof setLang==="function")setLang(LANG)}catch(e){}
 b.addEventListener("click",function(){var box=document.getElementById("mapBox");box.classList.remove("mapc");box.innerHTML='<iframe title="Big Big Boon pe hartă" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=Str.%20Trandafirilor%20166%2C%20547410%20Miercurea%20Nirajului&amp;z=14&amp;output=embed"></iframe>'})})();
 </script>
+<script defer src="motion.js"></script>
 </body>
 </html>

@@ -569,6 +569,7 @@ footer .flogo img{height:104px;width:auto}
 footer h3.fh{font:700 12px var(--fd);letter-spacing:.16em;text-transform:uppercase;color:#fff;margin-bottom:14px}
 .tm b{color:#5E636B}
 </style>
+<link rel="stylesheet" href="motion.css">
 </head>
 <body data-page="contact" data-title="titleContact">
 <div id="intro" aria-hidden="true">
@@ -1022,5 +1023,6 @@ if(saved!=='ro')setLang(saved);
 try{Object.assign(T.hu,{mapShow:"Térkép megjelenítése",mapNote:"A térkép csak kattintás után töltődik be a Google-tól."});Object.assign(T.en,{mapShow:"Show the map",mapNote:"The map loads from Google only after you tap."});RO.mapShow=RO.mapShow||"Arată harta";RO.mapNote=RO.mapNote||"Harta se încarcă de la Google doar după ce apeși.";if(typeof LANG!=="undefined"&&LANG!=="ro"&&typeof setLang==="function")setLang(LANG)}catch(e){}
 b.addEventListener("click",function(){var box=document.getElementById("mapBox");box.classList.remove("mapc");box.innerHTML='<iframe title="Big Big Boon pe hartă" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=Str.%20Trandafirilor%20166%2C%20547410%20Miercurea%20Nirajului&amp;z=14&amp;output=embed"></iframe>'})})();
 </script>
+<script defer src="motion.js"></script>
 </body>
 </html>
