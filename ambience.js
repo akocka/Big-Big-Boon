@@ -38,11 +38,25 @@
             g.gain.linearRampToValueAtTime(0.0001, t + len + 0.1); s.connect(bp); bp.connect(g); g.connect(out); s.start(t); s.stop(t + len + 0.2); return len + R(3, 6); }
           tone(t, 300, 0.05, 0.25, 0.9, 'sawtooth', 340); return R(3, 6); /* soft wood creak */
         },
-        intro: function (t0) { /* lights come on with the intro */
-          var o = ctx.createOscillator(), f = ctx.createBiquadFilter(), g = ctx.createGain(); o.type = 'sawtooth'; o.frequency.value = 120; f.type = 'bandpass'; f.frequency.value = 480; f.Q.value = 1.5;
-          var v = 0.06, t = t0 + 1.75; g.gain.setValueAtTime(0.0001, t);[[0.24, v], [0.37, 0.006], [0.55, v], [0.68, 0.02], [1.1, v * 0.7], [2.6, 0.0001]].forEach(function (p) { g.gain.linearRampToValueAtTime(p[1], t + p[0]); });
-          o.connect(f); f.connect(g); g.connect(out); o.start(t); o.stop(t + 2.8);
-          burst(t, 3500, 6, 0.18, 0.03); tone(t0 + 1.2, 520, 0.12, 0.004, 0.25, 'triangle', 200);
+        intro: function (t0) { /* the kiosk builds itself: drafting, drilling, nailing, the panel, lights, done */
+          var now = ctx.currentTime - 0.03, Q = function (t, fn) { if (t0 + t >= now) fn(t0 + t); };
+          for (var i = 0; i < 8; i++) Q(i * 0.09, function (t) { burst(t, R(4200, 5600), 2.5, 0.07, R(0.14, 0.22)); });           /* pencil strokes on the blueprint */
+          Q(0.32, function (t) { var o = ctx.createOscillator(), f = ctx.createBiquadFilter(), g = ctx.createGain(); o.type = 'sawtooth';      /* drill drives a screw */
+            o.frequency.setValueAtTime(160, t); o.frequency.exponentialRampToValueAtTime(430, t + 0.25); o.frequency.setValueAtTime(430, t + 0.5); o.frequency.exponentialRampToValueAtTime(200, t + 0.68);
+            f.type = 'bandpass'; f.frequency.value = 1100; f.Q.value = 1.2; g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.07, t + 0.06); g.gain.setValueAtTime(0.07, t + 0.5); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.72);
+            o.connect(f); f.connect(g); g.connect(out); o.start(t); o.stop(t + 0.75); });
+          [1.0, 1.14, 1.3, 1.44].forEach(function (h, k) { Q(h, function (t) { tone(t, 380 + k * 30, 0.16, 0.003, 0.14, 'triangle', 170); burst(t, 2600 + k * 150, 3, 0.16, 0.05); }); }); /* nails */
+          Q(1.2, function (t) { tone(t, 230, 0.2, 0.004, 0.32, 'triangle', 95); burst(t, 900, 1, 0.14, 0.12); });                      /* the panel drops into place */
+          Q(1.62, function (t) { burst(t, 3800, 6, 0.1, 0.03); burst(t + 0.07, 3600, 6, 0.08, 0.03); });                                 /* clamp ratchet */
+          Q(1.75, function (t) { burst(t, 3500, 6, 0.18, 0.03);                                                                           /* switch + lights hum */
+            var o = ctx.createOscillator(), f = ctx.createBiquadFilter(), g = ctx.createGain(); o.type = 'sawtooth'; o.frequency.value = 120; f.type = 'bandpass'; f.frequency.value = 480; f.Q.value = 1.5;
+            var v = 0.06; g.gain.setValueAtTime(0.0001, t);[[0.24, v], [0.37, 0.006], [0.55, v], [0.68, 0.02], [1.1, v * 0.7], [2.6, 0.0001]].forEach(function (p) { g.gain.linearRampToValueAtTime(p[1], t + p[0]); });
+            o.connect(f); f.connect(g); g.connect(out); o.start(t); o.stop(t + 2.8); });
+          Q(2.1, function (t) { var s = ctx.createBufferSource(); s.buffer = PINK; var bp = ctx.createBiquadFilter(); bp.type = 'bandpass'; bp.Q.value = 1.4;   /* air rises under the logo */
+            bp.frequency.setValueAtTime(500, t); bp.frequency.exponentialRampToValueAtTime(3200, t + 0.9); var g = ctx.createGain(); g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.12, t + 0.6); g.gain.exponentialRampToValueAtTime(0.0001, t + 1.2);
+            s.connect(bp); bp.connect(g); g.connect(out); s.start(t); s.stop(t + 1.3); });
+          [2.7, 2.86].forEach(function (h) { Q(h, function (t) { tone(t, 300, 0.2, 0.003, 0.22, 'triangle', 120); burst(t, 2000, 2.5, 0.14, 0.06); }); }); /* done: two firm taps */
+          return 3.4;
         }
       },
       restaurant: {
@@ -72,12 +86,25 @@
       }
     }[preset];
 
+    /* Amaryllis hero: the zoom into the shop is "played" by the scroll: air that opens up as you go deeper,
+       petals rustling with your scroll speed, and a bloom chord when "Totul începe cu o floare" appears */
+    var hs = null, armed = true;
+    function heroInit() { var s = ctx.createBufferSource(); s.buffer = PINK; s.loop = true; var bp = ctx.createBiquadFilter(); bp.type = 'bandpass'; bp.Q.value = 0.9; bp.frequency.value = 700;
+      var g = ctx.createGain(); g.gain.value = 0; s.connect(bp); bp.connect(g); g.connect(out); s.start(); hs = { bp: bp, g: g, last: 0 }; }
+    function bloom(t) { [523.3, 659.3, 784, 1046.5, 1318.5, 1568].forEach(function (f, i) { tone(t + i * 0.09, f, 0.06 / (1 + i * 0.4), 0.004, 2.4); tone(t + i * 0.09, f * 2, 0.012, 0.004, 1.2); }); }
     var next = 0, LEVEL = preset === "garden" ? 1.8 : 1.45;
     return {
       start: function (introT0) {
         P.bed(); out.gain.setValueAtTime(0, ctx.currentTime); out.gain.linearRampToValueAtTime(LEVEL, ctx.currentTime + 1.2);
-        if (introT0 != null) P.intro(introT0);
-        next = ctx.currentTime + R(0.4, 1.2);
+        var hold = 0; if (introT0 != null) hold = (P.intro(introT0) || 0) + introT0 - ctx.currentTime;
+        next = ctx.currentTime + Math.max(hold, 0) + R(0.4, 1.2);
+      },
+      hero: function (p, v) {
+        if (!hs) heroInit(); var t = ctx.currentTime, inHero = p > 0.005 && p < 0.99;
+        hs.bp.frequency.setTargetAtTime(600 + p * 3200, t, 0.15);
+        hs.g.gain.setTargetAtTime(inHero ? Math.min(0.16, 0.02 + v * 0.05) : 0, t, inHero ? 0.12 : 0.4);
+        if (inHero && v > 0.6 && t - hs.last > 0.09) { hs.last = t; burst(t, R(2500, 5000), 2, Math.min(0.06, 0.015 * v), R(0.05, 0.12)); }
+        if (p > 0.82 && armed) { armed = false; bloom(t + 0.05); } if (p < 0.6) armed = true;
       },
       schedule: function (until) { while (next < until) next += P.events(next); },
       fade: function (v, sec) { out.gain.cancelScheduledValues(ctx.currentTime); out.gain.setValueAtTime(out.gain.value, ctx.currentTime); out.gain.linearRampToValueAtTime(v * LEVEL, ctx.currentTime + sec); }
@@ -92,8 +119,13 @@
     eng = Engine(ctx, ctx.destination, PRESET);
     var introOn = document.querySelector('#intro,#ointro') && (document.body.classList.contains('intro-on') || document.documentElement.classList.contains('oi-on'));
     var t0 = window.__introT0 ? ctx.currentTime - (performance.now() - window.__introT0) / 1000 : null;
-    eng.start(introOn && t0 != null && ctx.currentTime - t0 < 2 ? t0 : null);
+    eng.start(introOn && t0 != null && ctx.currentTime - t0 < 3.2 ? t0 : null);
     timer = setInterval(function () { eng.schedule(ctx.currentTime + 1.5); }, 500); eng.schedule(ctx.currentTime + 1.5);
+    var zh = PRESET === 'garden' && document.getElementById('zh');
+    if (zh) { var lastY = scrollY, lastT = performance.now(), vel = 0;
+      var hero = function () { var now = performance.now(), dt = Math.max(16, now - lastT), dy = Math.abs(scrollY - lastY); lastY = scrollY; lastT = now;
+        vel = vel * 0.7 + (dy / dt) * 0.3 * 3; var p = Math.min(1, Math.max(0, scrollY / Math.max(1, zh.offsetHeight - innerHeight))); eng.hero(p, vel); };
+      addEventListener('scroll', hero, { passive: true }); setInterval(function () { vel *= 0.6; hero(); }, 120); }
   }
   function unlock() { ctx.resume().then(go).catch(function () {}); }
   if (ctx.state === 'running') go(); else unlock();
