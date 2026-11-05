@@ -622,6 +622,16 @@ footer h3.fh{font:700 12px var(--fd);letter-spacing:.16em;text-transform:upperca
 @media (max-width:700px){.hero .bgimg[style*="g-img-bd07fb-1200"]{background-image:url(img/g-img-bd07fb-600.webp)!important}}
 </style>
 <link rel="stylesheet" href="motion.css">
+<style>#intro.wait,#intro.wait *:not(.ib-gate):not(.ib-gate *){animation-play-state:paused!important}
+.ib-gate{position:absolute;left:50%;top:50%;z-index:4;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:6px;width:168px;height:168px;justify-content:center;border-radius:50%;border:1.5px solid rgba(217,164,102,.55);background:rgba(11,13,16,.6);color:#F1EFEA;cursor:pointer;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);transition:opacity .45s ease,transform .6s cubic-bezier(.16,1,.3,1);animation:ibGate 1s cubic-bezier(.16,1,.3,1) both}
+.ib-gate i{position:absolute;inset:-1.5px;border-radius:50%;border:1.5px solid rgba(217,164,102,.6);animation:ibRing 2.2s ease-out infinite}
+.ib-gate b{font:800 26px var(--fd,system-ui);letter-spacing:-.01em}
+.ib-gate small{font:600 11px var(--fd,system-ui);letter-spacing:.18em;text-transform:uppercase;color:#D9A466}
+.ib-gate:hover{transform:translate(-50%,-50%) scale(1.05)}
+.ib-gate.gone{opacity:0;transform:translate(-50%,-50%) scale(1.25);pointer-events:none}
+@keyframes ibGate{from{opacity:0;transform:translate(-50%,-50%) scale(.85)}}
+@keyframes ibRing{0%{transform:scale(1);opacity:.8}100%{transform:scale(1.5);opacity:0}}
+</style>
 </head>
 <body data-page="blog" data-title="artT">
 <div id="intro" aria-hidden="true">
@@ -660,7 +670,7 @@ footer h3.fh{font:700 12px var(--fd);letter-spacing:.16em;text-transform:upperca
   <p class="ib-cap" data-t="introCap">Metal și lemn. <em>Construit să dureze.</em></p>
   <button type="button" class="ib-skip" id="iskip"><span data-t="k3skip">Sari peste</span> →</button>
 </div>
-<script>window.__introT0=performance.now()</script>
+
 
 <header id="hdr">
   <a class="logo" href="index.html" aria-label="Big Big Boon">
@@ -1000,8 +1010,17 @@ applyCfg();render(0);buildStep(0);
   let seen=false;try{seen=sessionStorage.getItem('bbb-intro')==='1'}catch(e){}
   if(matchMedia('(prefers-reduced-motion:reduce)').matches||/nointro/.test(location.search)){el.remove();document.body.classList.remove('intro-on');return}
   document.body.classList.add('intro-on');
-  const end=()=>{if(!el.isConnected||el.classList.contains('out'))return;el.classList.add('out');document.body.classList.remove('intro-on');try{sessionStorage.setItem('bbb-intro','1')}catch(e){}setTimeout(()=>el.remove(),900)};
-  $('iskip').onclick=end;el.addEventListener('click',e=>{if(e.target===el)end()});setTimeout(end,3700);
+  const end=()=>{if(!el.isConnected||el.classList.contains('out'))return;el.classList.add('out');document.body.classList.remove('intro-on');try{sessionStorage.setItem('bbb-intro','1')}catch(e){}window.dispatchEvent(new Event('bbb-intro-end'));setTimeout(()=>el.remove(),900)};
+  $('iskip').onclick=end;el.addEventListener('click',e=>{if(e.target===el&&!el.classList.contains('wait')&&performance.now()-(window.__introT0||0)>700)end()});
+  /* sound needs one tap: if the browser blocks it, hold the intro on an "Intră" screen and start both together */
+  let ac=null,begun=false;try{ac=new (window.AudioContext||window.webkitAudioContext)();window.__bbbAC=ac}catch(e){}
+  const begin=()=>{if(begun)return;begun=true;window.__introT0=performance.now();el.classList.remove('wait');window.__introT0=performance.now();window.dispatchEvent(new Event('bbb-intro-start'));setTimeout(end,3700)};
+  if(!ac||ac.state==='running')begin();
+  else{el.classList.add('wait');const L={ro:['Intră','cu sunet'],hu:['Belépés','hanggal'],en:['Enter','with sound']}[(()=>{try{return localStorage.getItem('bbb-lang')||'ro'}catch(e){return 'ro'}})()]||['Intră','cu sunet'];
+    const g=document.createElement('button');g.type='button';g.className='ib-gate';g.innerHTML='<i></i><b>'+L[0]+'</b><small>'+L[1]+'</small>';el.appendChild(g);
+    const go=e=>{if(e&&e.target&&e.target.closest&&e.target.closest('.ib-skip'))return;try{ac.resume()}catch(x){}g.classList.add('gone');begin()};
+    g.addEventListener('click',go);el.addEventListener('pointerdown',go,{once:true});
+    ac.addEventListener('statechange',()=>{if(ac.state==='running'&&!begun){g.classList.add('gone');begin()}})}
 })();
 
 /* ---------- scroll loop ---------- */

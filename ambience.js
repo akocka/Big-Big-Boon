@@ -9,7 +9,8 @@
   if (!AC) return;
 
   function Engine(ctx, dest, preset) {
-    var out = ctx.createGain(); out.gain.value = 0; out.connect(dest);
+    var out = ctx.createGain(), comp = ctx.createDynamicsCompressor(); comp.threshold.value = -10; comp.ratio.value = 4; out.gain.value = 0; out.connect(comp); comp.connect(dest);
+    var BOOST = preset === 'workshop' ? 2.2 : 1;
     var R = function (a, b) { return a + Math.random() * (b - a); };
     function noiseBuf(sec, pink) {
       var b = ctx.createBuffer(1, Math.floor(ctx.sampleRate * sec), ctx.sampleRate), d = b.getChannelData(0), b0 = 0, b1 = 0, b2 = 0;
@@ -18,7 +19,7 @@
       return b;
     }
     var PINK = noiseBuf(6, true), WHITE = noiseBuf(1, false);
-    function env(g, t, a, peak, d) { g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(peak, t + a); g.gain.exponentialRampToValueAtTime(0.0001, t + a + d); }
+    function env(g, t, a, peak, d) { peak = Math.min(0.9, peak * BOOST); g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(peak, t + a); g.gain.exponentialRampToValueAtTime(0.0001, t + a + d); }
     function tone(t, f, peak, a, d, type, to) { var o = ctx.createOscillator(), g = ctx.createGain(); o.type = type || 'sine'; o.frequency.setValueAtTime(f, t); if (to) o.frequency.exponentialRampToValueAtTime(to, t + a + d); env(g, t, a, peak, d); o.connect(g); g.connect(out); o.start(t); o.stop(t + a + d + 0.05); }
     function burst(t, f, q, peak, d, src) { var s = ctx.createBufferSource(); s.buffer = src || WHITE; var bp = ctx.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = f; bp.Q.value = q; var g = ctx.createGain(); env(g, t, 0.004, peak, d); s.connect(bp); bp.connect(g); g.connect(out); s.start(t, R(0, 0.5)); s.stop(t + d + 0.05); }
     function bed(f, q, level, lfoHz, lfoDepth) { /* continuous, slowly breathing noise layer */
@@ -29,7 +30,7 @@
 
     var P = {
       workshop: {
-        bed: function () { bed(700, 0.6, 0.20, 0.07, 0.5); bed(2400, 1.2, 0.05, 0.11, 0.6); },
+        bed: function () { bed(700, 0.6, 0.06, 0.07, 0.5); bed(2400, 1.2, 0.015, 0.11, 0.6); },
         events: function (t) { /* distant work in the hall */
           var r = Math.random();
           if (r < 0.55) { var n = 2 + Math.floor(R(0, 4)), gap = R(0.28, 0.42); for (var i = 0; i < n; i++) { var tt = t + i * gap; tone(tt, 420, 0.10, 0.004, 0.16, 'triangle', 180); burst(tt, 2200, 3, 0.12, 0.05); } return n * gap + R(2.5, 5); }
@@ -92,7 +93,7 @@
     function heroInit() { var s = ctx.createBufferSource(); s.buffer = PINK; s.loop = true; var bp = ctx.createBiquadFilter(); bp.type = 'bandpass'; bp.Q.value = 0.9; bp.frequency.value = 700;
       var g = ctx.createGain(); g.gain.value = 0; s.connect(bp); bp.connect(g); g.connect(out); s.start(); hs = { bp: bp, g: g, last: 0 }; }
     function bloom(t) { [523.3, 659.3, 784, 1046.5, 1318.5, 1568].forEach(function (f, i) { tone(t + i * 0.09, f, 0.06 / (1 + i * 0.4), 0.004, 2.4); tone(t + i * 0.09, f * 2, 0.012, 0.004, 1.2); }); }
-    var next = 0, LEVEL = preset === "garden" ? 1.8 : 1.45;
+    var next = 0, LEVEL = preset === "garden" ? 1.8 : preset === "workshop" ? 1.0 : 1.45;
     return {
       start: function (introT0) {
         P.bed(); out.gain.setValueAtTime(0, ctx.currentTime); out.gain.linearRampToValueAtTime(LEVEL, ctx.currentTime + 1.2);
@@ -113,6 +114,19 @@
   window.__ambEngine = Engine; /* used for offline checks */
 
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (PRESET === 'workshop') { /* Big Big Boon: sound only while the intro builds the kiosk */
+    var wctx = window.__bbbAC, weng = null;
+    if (!wctx || !document.getElementById('intro')) return;
+    var wstart = function () {
+      if (weng || !window.__introT0) return;
+      var off = (performance.now() - window.__introT0) / 1000; if (off > 3.2) return;
+      var run = function () { if (weng) return; weng = Engine(wctx, wctx.destination, 'workshop'); weng.start(wctx.currentTime - off); weng.fade(1, 0.01); };
+      if (wctx.state === 'running') run(); else wctx.resume().then(run).catch(function () {});
+    };
+    var wend = function () { if (!weng) return; weng.fade(0, 0.9); setTimeout(function () { wctx.suspend(); }, 1000); };
+    addEventListener('bbb-intro-start', wstart); addEventListener('bbb-intro-end', wend);
+    wstart(); return;
+  }
   var ctx = new AC(), eng = null, timer = null;
   function go() {
     if (eng || ctx.state !== 'running') return;
