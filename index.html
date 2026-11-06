@@ -514,6 +514,16 @@ body.inbuild .mcta{transform:translateY(90px)!important}
 .b3-descs{display:none}
 @media(max-width:900px){.b3-desc{margin-top:6px;font-size:13.5px;min-height:0}.b3-big{top:84px;bottom:auto;right:14px;font-size:84px}}
 
+
+/* hero v3: product picker + direct line */
+.h2pick{margin-top:22px;max-width:640px}.h2pick>p{margin:0 0 10px;font:600 13px var(--fb);color:#C9C3B8;letter-spacing:.01em}
+.h2tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.h2t{display:flex;align-items:center;gap:9px;padding:6px 10px 6px 6px;border:1px solid rgba(255,255,255,.1);border-radius:14px;background:rgba(255,255,255,.04);color:#F1EEE8;font:600 12.5px/1.2 var(--fb);text-align:left;cursor:pointer;transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .25s,background .25s}
+.h2t img{flex:none;width:44px!important;height:44px!important;max-width:none;object-fit:cover!important;border-radius:9px;display:block}
+.h2t:hover,.h2t:focus-visible{transform:translateY(-2px);border-color:rgba(217,164,102,.6);background:rgba(217,164,102,.1);outline:0}
+.h2call{margin:16px 0 0;font:500 14px var(--fb);color:#A9A49A}.h2call a{color:#F1EEE8;font-weight:700;text-decoration:none;border-bottom:1px solid rgba(217,164,102,.6);margin:0 4px}
+@media(max-width:1100px){.h2tiles{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:900px){.h2pick{margin-top:20px}.h2hrs{display:block;margin-top:2px;font-size:13px}}
 </style>
 <style>
 /* ===== hero: the kiosk on a warm stage, words that move ===== */
@@ -881,10 +891,12 @@ body.intro-on .hero .in>*,body.intro-on .hero2 .h2kiosk,body.intro-on .hero2 .h2
     </div>
     <div class="in">
       <div class="eyebrow" data-t="heroEy">Big Big Boon · Construcții modulare · Mureș</div>
-      <h1 class="h2title"><span data-t="heroA">Construim</span><span class="rot" id="heroRot" aria-live="polite"><span class="on">case modulare</span></span><em data-t="heroB">din metal și lemn.</em></h1>
+      <h1 class="h2title"><span data-t="heroA">Construim</span><span class="rot" id="heroRot" aria-live="off"><span class="on">chioșcuri comerciale</span></span><em data-t="heroB">din metal și lemn.</em></h1>
       <p data-t="heroP">Case, birouri și chioșcuri modulare din metal și lemn, la dimensiunile tale — proiectate și construite în hala noastră din Miercurea Nirajului.</p>
-      <div class="ctas"><button class="btn p" data-go="contact"><span data-t="ctaQuote">Cere ofertă</span> →</button><a class="btn g" href="#produse" data-t="heroC1">Vezi produsele</a></div>
+      <div class="ctas"><button class="btn p" data-go="contact"><span data-t="ctaQuote">Cere ofertă</span> →</button><a class="btn g" href="#build" data-t="heroC3d">Configurează în 3D</a></div>
       <p class="h2note" data-t="ctaNote">Ofertă gratuită, fără obligații.</p>
+      <div class="h2pick"><p data-t="ht0">Ce vrei să construiești? Alege și cere ofertă:</p><div class="h2tiles"><button type="button" class="h2t" data-go="contact" data-type="0" data-label="Chioșc comercial"><img src="img/f-chiosc-premium-negru-lemn-600.webp" alt="Chioșc comercial negru cu lemn, produs de Big Big Boon" width="600" height="400" loading="eager" decoding="async"><span data-t="ht1">Chioșc comercial</span></button><button type="button" class="h2t" data-go="contact" data-type="1" data-label="Casă modulară"><img src="img/f-modul-verde-fatada-600.webp" alt="Casă modulară verde cu ferestre mari" width="600" height="400" loading="eager" decoding="async"><span data-t="ht2">Casă modulară</span></button><button type="button" class="h2t" data-go="contact" data-type="1" data-label="Birou modular"><img src="img/f-interior-modul-ferestre-mari-600.webp" alt="Interior de birou modular din lemn cu ferestre mari" width="600" height="400" loading="eager" decoding="async"><span data-t="ht3">Birou modular</span></button><button type="button" class="h2t" data-go="contact" data-type="2" data-label="Structură metal / lemn"><img src="img/cover-metal-sau-lemn-structura.webp" alt="Construcție din tablă cutată verde în hala Big Big Boon" width="600" height="400" loading="eager" decoding="async"><span data-t="ht4">Structură metal / lemn</span></button></div></div>
+      <p class="h2call"><span data-t="hcall">Preferi să vorbești direct?</span> <a href="tel:+40751065876">0751 065 876</a> <span class="h2hrs" data-t="hhrs">L–V, 08–16</span></p>
       <ul class="h2facts"><li data-t="hf1">Producție proprie în Mureș</li><li data-t="hf2">Dimensiuni la comandă</li><li data-t="hf3">Mobile și demontabile</li></ul>
     </div>
     <div class="h2marq" aria-hidden="true"><div class="tr" id="heroMarq"></div></div>
@@ -1147,6 +1159,7 @@ document.querySelectorAll('[data-nav]').forEach(a=>a.classList.toggle('on',a.dat
 document.addEventListener('click',e=>{
   const g=e.target.closest('[data-go]');if(!g)return;
   e.preventDefault();document.body.classList.remove('menu');
+  if(g.dataset.type){const s=document.getElementById('fType');if(s)s.selectedIndex=+g.dataset.type;if(window.ohiTrack)ohiTrack('hero_pick',{type:g.dataset.label})}
   if(g.dataset.pick){const s=document.getElementById('fType');const m={pl1h:0,pl2h:0,pl3h:1};s.selectedIndex=m[g.dataset.pick];const f=document.getElementById('fMsg');f.value=t(g.dataset.pick)+(f.value?'\n'+f.value:'')}
   const el=document.getElementById(g.dataset.go);
   if(el) el.scrollIntoView({behavior:'smooth'});
@@ -1701,7 +1714,7 @@ bootIO.observe(sec);
 <script>
 /* ===== hero: rotating words + moving strip, in the visitor's language ===== */
 (function(){
-  var W={ro:['case modulare','birouri modulare','chioșcuri comerciale','căsuțe de târg','pergole','copertine','mobilier de grădină'],
+  var W={ro:['chioșcuri comerciale','căsuțe de târg','case modulare','birouri modulare','pergole','copertine','mobilier de grădină'],
          hu:['moduláris házakat','moduláris irodákat','árusítóházakat','vásári házakat','pergolákat','előtetőket','kerti bútorokat'],
          en:['modular homes','modular offices','retail kiosks','market stalls','pergolas','carports','garden furniture']};
   var M={ro:['Case modulare','Birouri modulare','Chioșcuri comerciale','Căsuțe de târg','Structuri metalice','Pergole','Copertine','Mobilier de grădină','Producție proprie în Mureș'],
@@ -1710,8 +1723,8 @@ bootIO.observe(sec);
   try{
     if(typeof T!=='undefined'){
       T.hu=T.hu||{};T.en=T.en||{};
-      Object.assign(T.hu,{heroA:'Építünk',heroB:'fémből és fából.',hf1:'Saját gyártás Maros megyében',hf2:'Méretre készül',hf3:'Mobil és szétszerelhető'});
-      Object.assign(T.en,{heroA:'We build',heroB:'from metal and wood.',hf1:'Made in our own hall in Mureș',hf2:'Built to your size',hf3:'Mobile and demountable'});
+      Object.assign(T.hu,{heroC3d:'Tervezd meg 3D-ben',ht0:'Mit szeretnél építeni? Válassz és kérj ajánlatot:',ht1:'Árusítóház',ht2:'Moduláris ház',ht3:'Moduláris iroda',ht4:'Fém- / faszerkezet',hcall:'Inkább beszélnél?',hhrs:'H–P, 08–16',heroA:'Építünk',heroB:'fémből és fából.',hf1:'Saját gyártás Maros megyében',hf2:'Méretre készül',hf3:'Mobil és szétszerelhető'});
+      Object.assign(T.en,{heroC3d:'Configure in 3D',ht0:'What do you want to build? Pick one and get a quote:',ht1:'Retail kiosk',ht2:'Modular home',ht3:'Modular office',ht4:'Metal / wood structure',hcall:'Prefer to talk?',hhrs:'Mon–Fri, 08–16',heroA:'We build',heroB:'from metal and wood.',hf1:'Made in our own hall in Mureș',hf2:'Built to your size',hf3:'Mobile and demountable'});
       if(typeof RO!=='undefined'){RO.heroA=RO.heroA||'Construim';RO.heroB=RO.heroB||'din metal și lemn.';RO.hf1=RO.hf1||'Producție proprie în Mureș';RO.hf2=RO.hf2||'Dimensiuni la comandă';RO.hf3=RO.hf3||'Mobile și demontabile';}
     }
   }catch(e){}
