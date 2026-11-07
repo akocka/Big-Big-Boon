@@ -106,6 +106,13 @@ body.intro-on .hero .in>*,body.intro-on .ptag{animation-play-state:paused}
 @keyframes sh{0%{opacity:0;transform:translateY(0)}30%{opacity:1}100%{opacity:0;transform:translateY(14px)}}
 .sub-hero{min-height:72svh}
 
+.nums{background:var(--bg2,#EDE9E2);border-bottom:1px solid var(--line)}
+.nums .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+.nums .nm{padding:34px 18px;display:grid;gap:8px;align-content:start;border-left:1px solid var(--line)}
+.nums .nm:first-child{border-left:0}
+.nums b{font:800 clamp(38px,4.4vw,58px)/1 var(--fd);letter-spacing:-.03em;color:var(--ink);font-variant-numeric:tabular-nums}
+.nums .nm>span{font:500 14.5px/1.45 var(--fb);color:var(--mut);max-width:240px}
+@media(max-width:900px){.nums .wrap{grid-template-columns:1fr 1fr}.nums .nm{padding:24px 14px}.nums .nm:nth-child(3){border-left:0}.nums .nm:nth-child(n+3){border-top:1px solid var(--line)}}
 .strip{background:var(--dk);color:#E8E6E1;border-top:1px solid var(--dline)}
 .strip .wrap{display:grid;grid-template-columns:repeat(4,1fr)}
 .strip div.it{padding:24px 14px;display:flex;gap:12px;align-items:center;font:600 14.5px/1.35 var(--fd);border-left:1px solid var(--dline)}
@@ -897,6 +904,13 @@ body.intro-on .hero .in>*,body.intro-on .hero2 .h2kiosk,body.intro-on .hero2 .h2
     <div class="it"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><path d="M17 14v6M14 17h6"/></svg><span data-t="s3">Modular și extensibil</span></div>
     <div class="it"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 16V6h13v10M14 9h4l4 4v3h-8"/><circle cx="6" cy="17.5" r="2"/><circle cx="17" cy="17.5" r="2"/></svg><span data-t="s4">Gândit pentru transport și montaj</span></div>
   </div></div>
+
+  <section class="nums" aria-label="Big Big Boon în cifre"><div class="wrap">
+    <div class="nm"><b><span class="cu" data-to="2020" data-from="2000">2020</span></b><span data-t="nm1">anul în care am pornit firma</span></div>
+    <div class="nm"><b><span class="cu" data-to="8">8</span></b><span data-t="nm2">tipuri de construcții, de la pergole la case modulare</span></div>
+    <div class="nm"><b><span class="cu" data-to="1">1</span></b><span data-t="nm3">hală proprie în Miercurea Nirajului, unde facem totul</span></div>
+    <div class="nm"><b><span class="cu" data-to="0">0</span> lei</b><span data-t="nm4">costă oferta, fără nicio obligație</span></div>
+  </div></section>
 
   <section class="sec" id="produse">
     <div class="wrap">
@@ -1855,6 +1869,18 @@ try{ if(typeof T!=='undefined'){T.hu=T.hu||{};T.en=T.en||{};T.hu.abtMore='Tudj m
     b.addEventListener('pointermove',e=>{const r=b.getBoundingClientRect(),x=e.clientX-r.left-r.width/2,y=e.clientY-r.top-r.height/2;b.style.transform=`translate(${x*.22}px,${y*.3}px)`});
     b.addEventListener('pointerleave',()=>{b.style.transform=''})});
 })();
+</script>
+<script>
+/* numbers band: true facts only (company year, product types, own hall, free quote); count up once when seen */
+(function(){try{if(typeof T!=='undefined'){T.hu=T.hu||{};T.en=T.en||{};
+Object.assign(T.hu,{nm1:'ebben az évben indult a cég',nm2:'féle építmény, a pergolától a moduláris házig',nm3:'saját csarnok Nyárádszeredán, ott készül minden',nm4:'az ajánlat ára, kötelezettség nélkül'});
+Object.assign(T.en,{nm1:'the year we started the company',nm2:'types of buildings, from pergolas to modular homes',nm3:'own hall in Miercurea Nirajului, where we make everything',nm4:'is what a quote costs, with no obligation'});
+if(typeof RO!=='undefined'){RO.nm1=RO.nm1||'anul în care am pornit firma';RO.nm2=RO.nm2||'tipuri de construcții, de la pergole la case modulare';RO.nm3=RO.nm3||'hală proprie în Miercurea Nirajului, unde facem totul';RO.nm4=RO.nm4||'costă oferta, fără nicio obligație';}}
+  if(typeof LANG!=='undefined'&&LANG!=='ro'&&typeof setLang==='function')setLang(LANG);}catch(e){}
+var els=[].slice.call(document.querySelectorAll('.nums .cu'));if(!els.length||!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;io.unobserve(e.target);var el=e.target,to=+el.dataset.to,fr=+(el.dataset.from||0),t0=performance.now(),d=1400;
+(function f(t){var k=Math.min(1,(t-t0)/d);k=1-Math.pow(1-k,3);el.textContent=Math.round(fr+(to-fr)*k);if(k<1)requestAnimationFrame(f)})(t0)})},{threshold:.6});
+els.forEach(function(el){el.textContent=el.dataset.from||'0';io.observe(el)});})();
 </script>
 </body>
 </html>
