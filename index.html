@@ -440,7 +440,7 @@ body.intro-on .hero-home *,body.intro-on .hero-home .bgimg{animation-play-state:
 @media(prefers-reduced-motion:reduce){#intro{display:none}}
 
 /* ===== 3D builder (6 steps, spins left) ===== */
-.b3{position:relative;height:430vh;background:#15181c;color:#F1EFEA}
+.b3{position:relative;height:270vh;background:#15181c;color:#F1EFEA}
 .b3-ui{position:absolute;z-index:3;left:max(var(--pad),calc((100vw - 1240px)/2));top:50%;transform:translateY(-50%);width:min(400px,40vw)}
 .b3-ui h2{font-size:clamp(26px,2.8vw,38px);font-weight:800;margin-top:12px}
 .b3-list{list-style:none;margin-top:22px;display:flex;flex-direction:column;gap:2px;counter-reset:b}
@@ -455,7 +455,7 @@ body.intro-on .hero-home *,body.intro-on .hero-home .bgimg{animation-play-state:
 .b3-ui .btn{height:48px;font-size:14.5px}
 body.inbuild .mcta{transform:translateY(90px)!important}
 @media(max-width:900px){
-  .b3{height:460vh}
+  .b3{height:300vh}
   .b3-ui{left:12px;right:12px;width:auto;top:auto;bottom:14px;transform:none;padding:16px;border-radius:20px;background:rgba(24,27,31,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.1)}
   .b3-ui .eyebrow{display:none}
   .b3-ui h2{font-size:19px;margin:0}
@@ -524,6 +524,31 @@ body.inbuild .mcta{transform:translateY(90px)!important}
 .h2call{margin:16px 0 0;font:500 14px var(--fb);color:#A9A49A}.h2call a{color:#F1EEE8;font-weight:700;text-decoration:none;border-bottom:1px solid rgba(217,164,102,.6);margin:0 4px}
 @media(max-width:1100px){.h2tiles{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:900px){.h2pick{margin-top:20px}.h2hrs{display:block;margin-top:2px;font-size:13px}}
+
+/* hero v4: real photo, calmer column + how-we-work */
+.h3ph{position:absolute;z-index:2;right:max(24px,calc((100vw - 1240px)/2));top:52%;transform:translateY(-50%);width:min(44vw,640px);aspect-ratio:1286/840;margin:0;border-radius:28px;box-shadow:0 50px 90px -40px rgba(0,0,0,.85),0 0 0 1px rgba(255,255,255,.08)}
+.h3ph picture,.h3ph img{display:block;width:100%;height:100%;border-radius:inherit}
+.h3ph img{object-fit:cover;filter:saturate(.95) contrast(1.06) brightness(.93);animation:h3kb 18s ease-out both}
+.h3grade{position:absolute;inset:0;border-radius:inherit;background:linear-gradient(200deg,rgba(255,190,120,.10),transparent 45%),linear-gradient(0deg,rgba(15,13,11,.55),transparent 40%);pointer-events:none}
+.h3ph{overflow:visible}.h3ph picture{overflow:hidden;border-radius:inherit}
+@keyframes h3kb{from{transform:scale(1.08)}to{transform:scale(1)}}
+.h3ph .h2chip{position:absolute;z-index:3}.h3ph .h2chip.c1{left:-34px;top:14%;right:auto;bottom:auto}.h3ph .h2chip.c2{right:18px;bottom:-22px;left:auto;top:auto}
+.hero2 .in>*{max-width:min(560px,42vw)}.hero2 .in>p:not(.h2note){max-width:min(480px,34vw)}
+.h2note a{color:#F1EEE8;font-weight:700;text-decoration:none;border-bottom:1px solid rgba(217,164,102,.6);margin-left:2px}
+@media(max-width:900px){
+ .h3ph{top:84px;left:14px;right:14px;width:auto;transform:none;aspect-ratio:auto;height:min(68vw,440px);border-radius:22px}
+ .h3ph .h2chip.c1{left:10px;top:10px}.h3ph .h2chip.c2{right:10px;bottom:10px}
+ .hero2 .in>*,.hero2 .in>p:not(.h2note){max-width:none}.hero2 .in{padding-top:calc(84px + min(68vw,440px) + 28px)!important}
+}
+.hw-sec{padding-top:clamp(56px,7vw,96px)}
+.hw{list-style:none;margin:34px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;counter-reset:none}
+.hw li{position:relative;padding:22px 20px 24px;border-radius:20px;background:#fff;box-shadow:0 1px 0 rgba(0,0,0,.04),0 20px 40px -30px rgba(40,30,20,.35)}
+.hw b{display:inline-grid;place-items:center;height:30px;padding:0 10px;border-radius:99px;background:rgba(184,118,61,.12);color:var(--wood,#B8763D);font:800 13px var(--fd);letter-spacing:.06em}
+.hw h3{margin:14px 0 6px;font:800 18px/1.25 var(--fd);color:var(--ink)}.hw p{margin:0;color:#5b5f66;font-size:15px;line-height:1.55}
+.hw li:not(:last-child)::after{content:"";position:absolute;top:36px;right:-12px;width:8px;height:8px;border-top:2px solid rgba(184,118,61,.5);border-right:2px solid rgba(184,118,61,.5);transform:rotate(45deg)}
+.hwcta{margin-top:28px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;color:#5b5f66;font-size:15px}.hwcta a{color:var(--ink);font-weight:700}
+@media(max-width:900px){.hw{grid-template-columns:1fr 1fr}.hw li::after{display:none}}
+@media(max-width:560px){.hw{grid-template-columns:1fr}}
 </style>
 <style>
 /* ===== hero: the kiosk on a warm stage, words that move ===== */
@@ -867,36 +892,19 @@ body.intro-on .hero .in>*,body.intro-on .hero2 .h2kiosk,body.intro-on .hero2 .h2
 
   <section class="hero hero2" id="acasa">
     <div class="h2bg" aria-hidden="true"><div class="h2sun"></div><div class="h2lines"></div><div class="h2dust" id="h2dust"></div></div>
-    <div class="h2stage h2big" aria-hidden="true">
-      <div class="h2pool"></div>
-      <svg class="h2floor" viewBox="0 0 1431 1250" preserveAspectRatio="xMidYMin meet" aria-hidden="true">
-        <defs><filter id="fb1" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="75"/></filter><filter id="fb2" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="9"/></filter><filter id="fb4" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="26"/></filter><filter id="fb3" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="2.5"/></filter>
-        <radialGradient id="fg" cx="0.660" cy="0.717" r=".62"><stop offset="0" stop-color="#3a2c20"/><stop offset=".45" stop-color="#241c16"/><stop offset="1" stop-color="#151311" stop-opacity="0"/></radialGradient>
-        <linearGradient id="sp" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffc98a" stop-opacity=".55"/><stop offset="1" stop-color="#ffb060" stop-opacity="0"/></linearGradient></defs>
-        <polygon points="345,417 -440,726 1130,1123 1915,814" fill="url(#fg)" filter="url(#fb1)" opacity=".95"/>
-        <polygon points="510,565 56,745 965,975 1419,795" fill="#2a2420" opacity=".6" filter="url(#fb4)"/>
-        <polygon class="spl" points="366,810 548,856 457,892 275,846" fill="#ffbe78" opacity=".26" style="--o:.26" filter="url(#fb4)"/>
-        <polygon class="spl" points="614,872 919,950 795,999 490,921" fill="#ffbe78" opacity=".3" style="--o:.3" filter="url(#fb4)"/>
-        <polygon class="spl" points="965,948 1254,834 1419,876 1130,990" fill="#ffbe78" opacity=".34" style="--o:.34" filter="url(#fb4)"/>
-        <polygon points="527,580 106,747 948,960 1369,793" fill="#000" opacity=".85" filter="url(#fb2)"/>
-        <polyline points="118,747 944,956 1357,793" fill="none" stroke="#000" stroke-width="14" stroke-linejoin="round" opacity=".9" filter="url(#fb3)" transform="translate(0,4)"/>
-      </svg>
-      <picture><source media="(max-width:900px)" srcset="img/modul-cut3-720.webp 720w, img/modul-cut3-960.webp 960w" sizes="94vw"><img class="h2kiosk" src="img/modul-cut3.webp" alt="" width="1431" height="969" fetchpriority="high"></picture>
-      <div class="h2shadow"></div>
-      <div class="h2ground"></div>
-      <div class="h2glass g1"><i></i></div><div class="h2glass g2"><i></i></div><div class="h2glass g3"><i></i></div>
-      <span class="spk" style="--x:63.5%;--y:37.5%;--d:0s"></span><span class="spk" style="--x:79%;--y:41%;--d:1.6s;--s:.8"></span><span class="spk" style="--x:44%;--y:76%;--d:3.1s;--s:.7"></span><span class="spk" style="--x:33%;--y:44.5%;--d:4.4s;--s:.65"></span>
+    <figure class="h3ph">
+      <picture><source media="(max-width:900px)" srcset="img/f-ansamblu-module-chiosc-ciubar-600.webp 600w, img/f-ansamblu-module-chiosc-ciubar-1286.webp 1286w" sizes="100vw"><img src="img/f-ansamblu-module-chiosc-ciubar-1286.webp" alt="Modul verde cu terasă și chioșc din lemn, construite de Big Big Boon" width="1286" height="840" fetchpriority="high"></picture>
+      <i class="h3grade" aria-hidden="true"></i>
       <div class="h2chip c1"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 21V9l6-4v4l6-4v4l6-4v16z"/></svg></i><span><b data-t="chip1b">Producție proprie</b><small data-t="chip1s">Hala din Miercurea Nirajului</small></span></div>
       <div class="h2chip c2"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7h18M3 7v10M21 7v10M7 7v3M11 7v4M15 7v3M19 7v4"/></svg></i><span><b data-t="chip2b">La dimensiunile tale</b><small data-t="chip2s">Locuință, birou sau comerț</small></span></div>
-    </div>
+    </figure>
     <div class="in">
       <div class="eyebrow" data-t="heroEy">Big Big Boon · Construcții modulare · Mureș</div>
       <h1 class="h2title"><span data-t="heroA">Construim</span><span class="rot" id="heroRot" aria-live="off"><span class="on">chioșcuri comerciale</span></span><em data-t="heroB">din metal și lemn.</em></h1>
       <p data-t="heroP">Case, birouri și chioșcuri modulare din metal și lemn, la dimensiunile tale — proiectate și construite în hala noastră din Miercurea Nirajului.</p>
       <div class="ctas"><button class="btn p" data-go="contact"><span data-t="ctaQuote">Cere ofertă</span> →</button><a class="btn g" href="#build" data-t="heroC3d">Configurează în 3D</a></div>
-      <p class="h2note" data-t="ctaNote">Ofertă gratuită, fără obligații.</p>
-      <div class="h2pick"><p data-t="ht0">Ce vrei să construiești? Alege și cere ofertă:</p><div class="h2tiles"><button type="button" class="h2t" data-go="contact" data-type="0" data-label="Chioșc comercial"><img src="img/f-chiosc-premium-negru-lemn-600.webp" alt="Chioșc comercial negru cu lemn, produs de Big Big Boon" width="600" height="400" loading="eager" decoding="async"><span data-t="ht1">Chioșc comercial</span></button><button type="button" class="h2t" data-go="contact" data-type="1" data-label="Casă modulară"><img src="img/f-modul-verde-fatada-600.webp" alt="Casă modulară verde cu ferestre mari" width="600" height="400" loading="eager" decoding="async"><span data-t="ht2">Casă modulară</span></button><button type="button" class="h2t" data-go="contact" data-type="1" data-label="Birou modular"><img src="img/f-interior-modul-ferestre-mari-600.webp" alt="Interior de birou modular din lemn cu ferestre mari" width="600" height="400" loading="eager" decoding="async"><span data-t="ht3">Birou modular</span></button><button type="button" class="h2t" data-go="contact" data-type="2" data-label="Structură metal / lemn"><img src="img/cover-metal-sau-lemn-structura.webp" alt="Construcție din tablă cutată verde în hala Big Big Boon" width="600" height="400" loading="eager" decoding="async"><span data-t="ht4">Structură metal / lemn</span></button></div></div>
-      <p class="h2call"><span data-t="hcall">Preferi să vorbești direct?</span> <a href="tel:+40751065876">0751 065 876</a> <span class="h2hrs" data-t="hhrs">L–V, 08–16</span></p>
+      <p class="h2note"><span data-t="ctaNote">Ofertă gratuită, fără obligații.</span> <span data-t="hcall2">Sau sună:</span> <a href="tel:+40751065876">0751 065 876</a></p>
+
       <ul class="h2facts"><li data-t="hf1">Producție proprie în Mureș</li><li data-t="hf2">Dimensiuni la comandă</li><li data-t="hf3">Mobile și demontabile</li></ul>
     </div>
     <div class="h2marq" aria-hidden="true"><div class="tr" id="heroMarq"></div></div>
@@ -929,6 +937,20 @@ body.intro-on .hero .in>*,body.intro-on .hero2 .h2kiosk,body.intro-on .hero2 .h2
           <div class="tags"><span data-t="t_gard">Grădină</span><span data-t="t_deco">Decor</span><span data-t="t_cust">La comandă</span></div><div class="pcbtns"><button type="button" class="btn g pmore" data-more="3"><span data-t="btnMore">Vezi mai mult</span></button><button type="button" class="btn p ppick" data-pickp="3"><span data-t="btnPick">Alege asta</span> →</button></div></div></article>
       </div>
       <div class="prcta rv"><button class="btn o" data-go="contact"><span data-t="prCta">Ai o idee anume? Spune-ne și îți pregătim o ofertă</span> →</button></div>
+    </div>
+  </section>
+
+  <section class="sec hw-sec" id="cum">
+    <div class="wrap">
+      <div class="eyebrow rv" data-t="hwEy">Cum lucrăm</div>
+      <h2 class="h2 rv" data-t="hwH">De la primul telefon la montaj.</h2>
+      <ol class="hw">
+        <li class="rv"><b>01</b><h3 data-t="hw1">Ne spui ce ai nevoie</h3><p data-t="hw1p">Ne suni, completezi formularul sau treci pe la hala noastră din Miercurea Nirajului.</p></li>
+        <li class="rv"><b>02</b><h3 data-t="hw2">Proiect și ofertă</h3><p data-t="hw2p">Stabilim împreună dimensiunile, materialele și finisajele, apoi primești oferta personalizată.</p></li>
+        <li class="rv"><b>03</b><h3 data-t="hw3">Producție în hala proprie</h3><p data-t="hw3p">Structura, izolația, placarea și finisajele se fac în atelierul nostru, sub același acoperiș.</p></li>
+        <li class="rv"><b>04</b><h3 data-t="hw4">Transport și montaj</h3><p data-t="hw4p">Construcția e gândită pentru transport ușor; o livrăm și o montăm la locul ei.</p></li>
+      </ol>
+      <div class="hwcta rv"><button class="btn p" data-go="contact"><span data-t="ctaQuote">Cere ofertă</span> →</button><span><span data-t="hcall3">sau sună direct:</span> <a href="tel:+40751065876">0751 065 876</a></span></div>
     </div>
   </section>
 
@@ -1723,8 +1745,8 @@ bootIO.observe(sec);
   try{
     if(typeof T!=='undefined'){
       T.hu=T.hu||{};T.en=T.en||{};
-      Object.assign(T.hu,{heroC3d:'Tervezd meg 3D-ben',ht0:'Mit szeretnél építeni? Válassz és kérj ajánlatot:',ht1:'Árusítóház',ht2:'Moduláris ház',ht3:'Moduláris iroda',ht4:'Fém- / faszerkezet',hcall:'Inkább beszélnél?',hhrs:'H–P, 08–16',heroA:'Építünk',heroB:'fémből és fából.',hf1:'Saját gyártás Maros megyében',hf2:'Méretre készül',hf3:'Mobil és szétszerelhető'});
-      Object.assign(T.en,{heroC3d:'Configure in 3D',ht0:'What do you want to build? Pick one and get a quote:',ht1:'Retail kiosk',ht2:'Modular home',ht3:'Modular office',ht4:'Metal / wood structure',hcall:'Prefer to talk?',hhrs:'Mon–Fri, 08–16',heroA:'We build',heroB:'from metal and wood.',hf1:'Made in our own hall in Mureș',hf2:'Built to your size',hf3:'Mobile and demountable'});
+      Object.assign(T.hu,{hcall2:'Vagy hívj:',hcall3:'vagy hívj közvetlenül:',hwEy:'Hogyan dolgozunk',hwH:'Az első telefontól a szerelésig.',hw1:'Elmondod, mire van szükséged',hw1p:'Felhívsz, kitöltöd az űrlapot, vagy benézel nyárádszeredai csarnokunkba.',hw2:'Terv és ajánlat',hw2p:'Közösen meghatározzuk a méreteket, anyagokat és felületeket, majd megkapod a személyre szabott ajánlatot.',hw3:'Gyártás saját csarnokban',hw3p:'A szerkezet, a szigetelés, a burkolat és a felületek a műhelyünkben készülnek, egy fedél alatt.',hw4:'Szállítás és szerelés',hw4p:'Az építmény könnyű szállításra készül; leszállítjuk és a helyén felszereljük.',heroC3d:'Tervezd meg 3D-ben',ht0:'Mit szeretnél építeni? Válassz és kérj ajánlatot:',ht1:'Árusítóház',ht2:'Moduláris ház',ht3:'Moduláris iroda',ht4:'Fém- / faszerkezet',hcall:'Inkább beszélnél?',hhrs:'H–P, 08–16',heroA:'Építünk',heroB:'fémből és fából.',hf1:'Saját gyártás Maros megyében',hf2:'Méretre készül',hf3:'Mobil és szétszerelhető'});
+      Object.assign(T.en,{hcall2:'Or call:',hcall3:'or call directly:',hwEy:'How we work',hwH:'From the first call to installation.',hw1:'Tell us what you need',hw1p:'Call us, fill in the form, or visit our hall in Miercurea Nirajului.',hw2:'Design and quote',hw2p:'We agree on sizes, materials and finishes together, then you get a custom quote.',hw3:'Built in our own hall',hw3p:'Frame, insulation, cladding and finishes are made in our workshop, under one roof.',hw4:'Transport and installation',hw4p:'Built for easy transport; we deliver it and install it on site.',heroC3d:'Configure in 3D',ht0:'What do you want to build? Pick one and get a quote:',ht1:'Retail kiosk',ht2:'Modular home',ht3:'Modular office',ht4:'Metal / wood structure',hcall:'Prefer to talk?',hhrs:'Mon–Fri, 08–16',heroA:'We build',heroB:'from metal and wood.',hf1:'Made in our own hall in Mureș',hf2:'Built to your size',hf3:'Mobile and demountable'});
       if(typeof RO!=='undefined'){RO.heroA=RO.heroA||'Construim';RO.heroB=RO.heroB||'din metal și lemn.';RO.hf1=RO.hf1||'Producție proprie în Mureș';RO.hf2=RO.hf2||'Dimensiuni la comandă';RO.hf3=RO.hf3||'Mobile și demontabile';}
     }
   }catch(e){}
